@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import {  FaLongArrowAltRight } from 'react-icons/fa';
+import React from 'react';
+import { Link } from 'react-router-dom'
+import { FaLongArrowAltRight } from 'react-icons/fa';
 
 import ControlPanel from './control-panel';
 
@@ -28,7 +29,9 @@ const LoginComponent: React.FC = () => {
                     </div>
                     <div className="border-t-2 border-white w-full h-0 bg-white my-0"></div>
                     <div className="form-control mt-8 mb-12 w-2/5">
-                        <button className="btn btn-ghost text-white"><FaLongArrowAltRight size="3em" /></button>
+                        <Link className="btn bg-opacity-20 hover:bg-opacity-50 border-2 btn-xs sm:btn-sm md:btn-md lg:btn-lg text-white" to="/draw">
+                            <FaLongArrowAltRight size="3em" />
+                        </Link>
                     </div>
                 </div>
             </div>

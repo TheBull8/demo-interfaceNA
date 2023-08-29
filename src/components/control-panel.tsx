@@ -8,7 +8,7 @@ function ControlPanel(props) {
   // }
 
   return (
-    <div className="control-panel flex items-center">
+    <div className="absolute top-2 right-2 flex items-center">
       {/* <h3>Draw Polygon</h3>
       {polygonArea > 0 && (
         <p>
