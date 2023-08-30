@@ -50,7 +50,7 @@ const QueryComponent: React.FC = () => {
     const getChatGptResponse = async (userInput) => {
         const response = await openai.chat.completions.create({
             messages: [{ role: 'user', content: userInput }],
-            model: 'gpt-3.5-turbo',
+            model: 'ft:gpt-3.5-turbo-0613:personal::7sqvgovz',
         });
 
         return response.choices[0].message.content;
