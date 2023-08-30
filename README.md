@@ -1,6 +1,15 @@
-# demo-interface
-react app demo interface
+# Demo Interface - React App
+
+Welcome to the **Demo Interface** project! This README provides essential information to help you understand, set up, and use this React application effectively.
 
 ## Usage
 
-yarn start
+To run the application, follow these steps:
+
+1. Install project dependencies using Yarn:
+
+   ```bash
+   yarn install
+   yarn add
+
+2. added .env variable
