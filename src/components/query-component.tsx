@@ -7,11 +7,11 @@ import Map from 'react-map-gl';
 import DrawControl from '../draw-control';
 import ControlPanel from './control-panel';
 
-const TOKEN = 'pk.eyJ1IjoidGhlYnVsbDg4OCIsImEiOiJjbGx1d3IwczkxN3B6M2tvNzl5Zmp5YjQ5In0.hEjTjZYKx4lsvUQhnaajqw';
+const TOKEN = import.meta.env.VITE_MAPBOX_KEY;
 
 const QueryComponent: React.FC = () => {
     const openai = new OpenAI({
-        apiKey: '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',
+        apiKey: import.meta.env.VITE_OPENAI_KEY,
         dangerouslyAllowBrowser: true
     });
 
@@ -75,7 +75,7 @@ const QueryComponent: React.FC = () => {
     const getChatGptResponse = async (userInput) => {
         const response = await openai.chat.completions.create({
             messages: [{ role: 'user', content: userInput }],
-            model: 'ft:gpt-3.5-turbo-0613:personal::7sqvgovz',
+            model: import.meta.env.VITE_OPENAI_MODEL,
         });
 
         return response.choices[0].message.content;
@@ -158,9 +158,9 @@ const QueryComponent: React.FC = () => {
                             </button>
                         </div>
                     </div>
-                <Link className="btn bg-opacity-20 hover:bg-opacity-50 border-2 btn-md text-white w-1/12 mx-auto mt-5" to="/login">
-                    <FaLongArrowAltRight size="3em" />
-                </Link>
+                    <Link className="btn bg-opacity-20 hover:bg-opacity-50 border-2 btn-md text-white w-1/12 mx-auto mt-5" to="/login">
+                        <FaLongArrowAltRight size="3em" />
+                    </Link>
                 </div>
             </div>
         </div>
@@ -179,7 +179,7 @@ function ChatMessage({ key, sender, content }) {
                 </div>
             </div>
             <div className={`chat-bubble mb-8 mr-3 bg-slate-200 text-slate-600 text-left`}>
-                {content === "loading" ? <span className="loading loading-dots loading-lg"></span> : content}
+                {content === "loading" ? <span className="loading loading-dots loading-md"></span> : content}
             </div>
         </div>
     );
