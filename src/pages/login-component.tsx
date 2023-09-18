@@ -4,7 +4,7 @@ import { FaLongArrowAltRight } from 'react-icons/fa';
 import Map from 'react-map-gl';
 
 import DrawControl from '../draw-control';
-import ControlPanel from './control-panel';
+
 
 const TOKEN = 'pk.eyJ1IjoidGhlYnVsbDg4OCIsImEiOiJjbGx1d3IwczkxN3B6M2tvNzl5Zmp5YjQ5In0.hEjTjZYKx4lsvUQhnaajqw';
 
@@ -56,7 +56,7 @@ const LoginComponent: React.FC = () => {
                     onDelete={onDelete}
                 />
             </Map>
-            <ControlPanel />
+            {/* <ControlPanel /> */}
             <div className="absolute w-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/3">
 
                 <div className="hero-content w-full flex-col  bg-white  border-2 border-white rounded-lg  bg-opacity-10 p-0">

@@ -1,19 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Link } from 'react-router-dom';
-import { FaSearch, FaMicrophone, FaUpload, FaAngleDown, FaLongArrowAltRight } from 'react-icons/fa';
-import OpenAI from 'openai';
 import Map from 'react-map-gl';
 
 import DrawControl from '../draw-control';
-import ControlPanel from './control-panel';
+
 
 const TOKEN = import.meta.env.VITE_MAPBOX_KEY;
 
 const QueryComponent: React.FC = () => {
-    const openai = new OpenAI({
-        apiKey: import.meta.env.VITE_OPENAI_KEY,
-        dangerouslyAllowBrowser: true
-    });
 
     const [messages, setMessages] = useState([]);
     const [inputFocused, setInputFocused] = useState(false);
@@ -49,37 +42,7 @@ const QueryComponent: React.FC = () => {
         });
     }, []);
 
-    const handleInputKeyDown = async (event) => {
-        if (event.key === 'Enter' && userInput.trim() !== '') {
-            const userMessage = { text: userInput, isBot: false };
-            const loadingMessage = { text: 'loading', isBot: true };
-
-            setMessages([...messages, userMessage, loadingMessage]);
-            setUserInput('');
-
-            try {
-                const botResponse = await getChatGptResponse(userInput);
-                const botMessage = { text: botResponse, isBot: true };
-                setMessages((prevMessages) => [
-                    ...prevMessages.slice(0, -1), // Remove loading message
-                    botMessage // Add bot response
-                ]);
-
-            } catch (error) {
-                console.error("Error fetching bot response:", error);
-            }
-        }
-    };
-
-
-    const getChatGptResponse = async (userInput) => {
-        const response = await openai.chat.completions.create({
-            messages: [{ role: 'user', content: userInput }],
-            model: import.meta.env.VITE_OPENAI_MODEL,
-        });
-
-        return response.choices[0].message.content;
-    };
+   
 
     const containerStartSpanClass = `query-span join-item w-1/6 justify-center flex ${inputFocused ? 'rounded-bl-lg' : 'rounded-l-lg'
         } bg-white text-white border-2 border-white border-r-0 px-10 bg-opacity-30`;
@@ -88,7 +51,7 @@ const QueryComponent: React.FC = () => {
         } bg-white text-white border-2 border-white border-l-0 px-2 bg-opacity-30`;
 
     return (
-        <div className="query-container flex flex-col justify-end">
+        <div className="query-container">
             <Map
                 initialViewState={{
                     longitude: 102.08,
@@ -100,7 +63,7 @@ const QueryComponent: React.FC = () => {
                 mapboxAccessToken={TOKEN}
             >
                 <DrawControl
-                    position="top-left"
+                    position="bottom-right"
                     displayControlsDefault={false}
                     controls={{
                         polygon: true,
@@ -113,8 +76,8 @@ const QueryComponent: React.FC = () => {
                 />
             </Map>
 
-            <ControlPanel />
-            <div className="absolute w-1/2 bottom-20 left-1/2 transform -translate-x-1/2">
+            {/* <ControlPanel /> */}
+            {/* <div className="absolute w-1/2 bottom-20 left-1/2 transform -translate-x-1/2">
                 <div className="text-center pt-5 flex-col justify-center">
                     {inputFocused && (
                         <div
@@ -162,27 +125,11 @@ const QueryComponent: React.FC = () => {
                         <FaLongArrowAltRight size="3em" />
                     </Link>
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 };
 
 export default QueryComponent;
-function ChatMessage({ key, sender, content }) {
-    const avatarImage = sender === 'start' ? '/images/logo.svg' : '/images/avatar.svg';
-
-    return (
-        <div className={`chat chat-${sender}`}>
-            <div className="chat-image avatar">
-                <div className={`w-${sender === 'start' ? 24 : 20} rounded-full`}>
-                    <img src={avatarImage} alt={`Avatar of ${sender}`} />
-                </div>
-            </div>
-            <div className={`chat-bubble mb-8 mr-3 bg-slate-200 text-slate-600 text-left`}>
-                {content === "loading" ? <span className="loading loading-dots loading-md"></span> : content}
-            </div>
-        </div>
-    );
-}
 
 

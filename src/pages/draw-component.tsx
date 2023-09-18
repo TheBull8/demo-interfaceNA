@@ -5,7 +5,7 @@ import Map from 'react-map-gl';
 
 
 import DrawControl from '../draw-control';
-import ControlPanel from './control-panel';
+
 
 const TOKEN = 'pk.eyJ1IjoidGhlYnVsbDg4OCIsImEiOiJjbGx1d3IwczkxN3B6M2tvNzl5Zmp5YjQ5In0.hEjTjZYKx4lsvUQhnaajqw';
 
@@ -31,7 +31,7 @@ const DrawComponent: React.FC = () => {
         });
     }, []);
 
-    return (<>
+    return (<div className="query-container flex flex-col justify-end">
         <Map
             initialViewState={{
                 longitude: 102.08,
@@ -55,11 +55,11 @@ const DrawComponent: React.FC = () => {
                 onDelete={onDelete}
             />
         </Map>
-        <ControlPanel polygons={Object.values(features)} />
+        {/* <ControlPanel polygons={Object.values(features)} /> */}
         <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2" >
             <button className="btn bg-opacity-20 hover:bg-opacity-50 border-2 btn-xs sm:btn-sm md:btn-md lg:btn-lg text-white"><FaLongArrowAltRight size="3em" /></button>
         </div>
-    </>
+    </div>
     );
 }
 export default DrawComponent;

@@ -25,7 +25,6 @@ function ControlPanel(props) {
           <label htmlFor="my-drawer-4" className="drawer-button btn btn-lg btn-square btn-ghost text-white">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-12 h-12 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
           </label>
-
         </div>
         <div className="drawer-side">
           <label htmlFor="my-drawer-4" className="drawer-overlay"></label>

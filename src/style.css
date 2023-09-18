@@ -3,9 +3,8 @@
     /* Set your desired width */
     height: 100vh;
     /* background-image: url('/images/background.png'); */
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
+    overflow: hidden;
+
 }
 
 .input:focus {
@@ -14,11 +13,145 @@
 
 
 .query-span {
-    padding-top: 14px!important;
-    padding-bottom: 6px!important;
+    padding-top: 14px !important;
+    padding-bottom: 6px !important;
 }
 
 .query-button {
-    padding-top: 6px!important;
-    padding-bottom: 6px!important;
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
+}
+
+
+/* Add these styles to your CSS or SCSS file */
+
+/* Layout container */
+.layout {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    position: relative;
+    /* Make the layout a positioning context for absolute elements */
+}
+
+/* Navbar */
+.navbar {
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    padding: 15px 80px;
+    position: fixed;
+
+    /* Fixed position */
+    top: 0;
+    /* Position at the top */
+    left: 0;
+    /* Position at the left */
+    right: 0;
+    /* Stretch to the right edge */
+    z-index: 6;
+    /* Higher z-index to appear on top of other elements */
+}
+
+/* Sidebar */
+.sidebar {
+    width: 80px;
+    background-color: white;
+    box-shadow: 3px 4px 5px rgba(0, 0, 0, 0.2);
+    padding-top: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: fixed;
+    /* Fixed position */
+    top: 0;
+    /* Position at the top */
+    bottom: 0;
+    /* Stretch to the bottom */
+    z-index: 5;
+    /* Lower z-index to appear behind the navbar */
+    overflow-y: auto;
+    /* Enable scrolling if the sidebar content overflows */
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar-menu li {
+    margin-bottom: 20px;
+}
+
+.sidebar-menu a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* Main content */
+.main-content {
+    flex: 1;
+}
+
+
+.chatbox {
+    position: absolute;
+    top: 0;
+    left: 80px;
+    height: 100%;
+    width: 480px;
+    transition: left 0.3s ease-in-out;
+    background-color: #fff;
+    z-index: 3;
+   
+}
+
+.chatbox-toggle {
+    position: absolute;
+    top: 47%;
+    right: -40px;
+    height: 100px;
+    width: 40px;
+    z-index: 4;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color: #fff;
+    color: black;
+}
+
+.content {
+    position: absolute;
+    top: 60px;
+    left: -400px;
+    right: 0;
+    height: 100%;
+    transition: left 0.3s ease-in-out;
+    background-color: #fff;
+}
+
+.chatbox.open {
+    left: -400px;
+}
+
+.content.open {
+    left: 80px;
+}
+
+.chat-card {
+    margin-top: 110px;
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 160px);
+}
+
+.chat-content {
+    overflow-y: auto;
+    flex: 1;
+    /* Allow the chat content to take up remaining space */
+}
+
+.chat-input {
+    margin-top: auto;
+    /* Push the input box to the bottom */
 }

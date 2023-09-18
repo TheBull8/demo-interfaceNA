@@ -5,21 +5,24 @@ import './App.css';
 import "./style.css"
 
 
-import QueryComponent from './components/query-component';
-import ChatComponent from './components/chat-component';
-import DrawComponent from './components/draw-component';
-import LoginComponent from './components/login-component';
+import QueryComponent from './pages/query-component';
+import ChatComponent from './pages/chat-component';
+import DrawComponent from './pages/draw-component';
+import LoginComponent from './pages/login-component';
+import Layout from './components/layout';
 
 
 export default function App() {
   return (
     <Router >
-      <Routes>
-        <Route path="/" element={<QueryComponent />} />
-        <Route path="/chat" element={<ChatComponent />} />
-        <Route path="/draw" element={<DrawComponent />} />
-        <Route path="/login" element={<LoginComponent />} />
-      </Routes>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<QueryComponent />} />
+          <Route path="/chat" element={<ChatComponent />} />
+          <Route path="/draw" element={<DrawComponent />} />
+          <Route path="/login" element={<LoginComponent />} />
+        </Routes>
+      </Layout>
     </Router>
   );
 }
