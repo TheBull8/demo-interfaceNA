@@ -1,5 +1,5 @@
 import React, { ReactNode, useState } from 'react';
-import Navbar from './Navbar'; // Import the Navbar component
+import Navbar from './navbar'; // Import the Navbar component
 import Sidebar from './sidebar'
 import ChatBox from './chat-box';
 interface LayoutProps {
