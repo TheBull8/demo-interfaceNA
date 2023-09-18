@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom'
 
 const Navbar = () => {
     const [isDropdownOpen, setDropdownOpen] = useState(false);
@@ -25,10 +26,10 @@ const Navbar = () => {
                     </option>
 
                 </select>
-                <a href="/login" className="btn btn-primary text-white mr-3">
-                    Sign in
-                </a>
 
+                <Link className="btn btn-primary text-white mr-3" to="/login">
+                    Sign in
+                </Link>
 
                 <div className="dropdown dropdown-bottom dropdown-end">
                     <label tabIndex={0} className="btn m-1"><svg xmlns="http://www.w3.org/2000/svg" fill="#000" viewBox="0 0 24 24" className="inline-block w-8 h-8 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
