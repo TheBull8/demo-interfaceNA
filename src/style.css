@@ -72,6 +72,23 @@
     /* Enable scrolling if the sidebar content overflows */
 }
 
+.chat-image {
+    margin-top: 8px;
+    align-self: flex-start !important;
+}
+
+.chat-bubble {
+    border-radius: 12px !important;
+}
+
+.chat-bubble::before {
+    display: none;
+}
+
+.chat-bubble::after {
+    display: none;
+}
+
 .sidebar-menu {
     list-style: none;
     padding: 0;
@@ -103,7 +120,7 @@
     transition: left 0.3s ease-in-out;
     background-color: #fff;
     z-index: 3;
-   
+
 }
 
 .chatbox-toggle {
@@ -142,16 +159,40 @@
     margin-left: 20px;
     display: flex;
     flex-direction: column;
-    height: calc(100% - 160px);
+    height: calc(100% - 140px);
 }
 
 .chat-content {
     overflow-y: auto;
     flex: 1;
+    position: relative;
     /* Allow the chat content to take up remaining space */
 }
 
-.chat-input {
-    margin-top: auto;
-    /* Push the input box to the bottom */
+
+/* Style for the top mask */
+.top-mask {
+    position: absolute;
+    top: 90px;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    z-index: 5;
+    /* Height of the top mask when it's visible */
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1), transparent);
+    pointer-events: none;
+    /* Allows interaction with content below the mask */
+}
+
+/* Style for the bottom mask */
+.bottom-mask {
+    position: absolute;
+    bottom: 80px;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    /* Height of the bottom mask when it's visible */
+    background: linear-gradient(to top, rgba(255, 255, 255, 1), transparent);
+    pointer-events: none;
+    /* Allows interaction with content above the mask */
 }

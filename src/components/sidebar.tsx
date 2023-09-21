@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom'
-const Sidebar = () => {
+const Sidebar = ({ toggleChatBox }) => {
 
     return (
         <div className="sidebar">
             <ul className="sidebar-menu d-flex justify-center align-items-center">
-                <li>
+                <li onClick={toggleChatBox}>
                     <Link className="  text-white mr-3" to="/">
                         <div className="text-center">
                             <img className="mx-auto" src="/images/chat.svg" width="40" height="40" />
