@@ -170,25 +170,25 @@ const ChatBox = props => {
                   <h3 className="ml-2 text-gray font-bold">
                     You may select one of these topics:
                   </h3>
-                  <div disabled={isLoading} className={`card my-2 w-96 bg-base-100 border-solid border-2 border-current cursor-pointer${isLoading ? ' opacity-50 pointer-events-none' : ''}`}
+                  <div className={`card my-2 w-96 bg-base-100 border-solid border-2 border-current cursor-pointer${isLoading ? ' opacity-50 pointer-events-none' : ''}`}
                     onClick={(e) => sendMessage("What is GreenAnt?")}>
                     <div className="card-body py-4 px-8 text-left">
                       <h4>What is GreenAnt?</h4>
                     </div>
                   </div>
-                  <div disabled={isLoading} className={`card my-2 w-96 bg-base-100 border-solid border-2 border-current cursor-pointer${isLoading ? ' opacity-50 pointer-events-none' : ''}`}
+                  <div className={`card my-2 w-96 bg-base-100 border-solid border-2 border-current cursor-pointer${isLoading ? ' opacity-50 pointer-events-none' : ''}`}
                     onClick={(e) => sendMessage("How can I tokenize my trees?")}>
                     <div className="card-body py-4 px-8 text-left">
                       <h4>How can I tokenize my trees?</h4>
                     </div>
                   </div>
-                  <div disabled={isLoading} className={`card my-2 w-96 bg-base-100 border-solid border-2 border-current cursor-pointer${isLoading ? ' opacity-50 pointer-events-none' : ''}`}
+                  <div className={`card my-2 w-96 bg-base-100 border-solid border-2 border-current cursor-pointer${isLoading ? ' opacity-50 pointer-events-none' : ''}`}
                     onClick={(e) => sendMessage("How do I estimate my carbon footprint?")}>
                     <div className="card-body py-4 px-8 text-left">
                       <h4>How do I estimate my carbon footprint?</h4>
                     </div>
                   </div>
-                  <div disabled={isLoading} className={`card my-2 w-96 bg-base-100 border-solid border-2 border-current cursor-pointer${isLoading ? ' opacity-50 pointer-events-none' : ''}`}
+                  <div className={`card my-2 w-96 bg-base-100 border-solid border-2 border-current cursor-pointer${isLoading ? ' opacity-50 pointer-events-none' : ''}`}
                     onClick={(e) => sendMessage("Locate my trees")}>
                     <div className="card-body py-4 px-8 text-left">
                       <h4>Locate my trees</h4>
