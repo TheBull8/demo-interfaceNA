@@ -1,8 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import Select from 'react-select';
 import { Link } from 'react-router-dom'
 
 const Navbar = () => {
     const [isDropdownOpen, setDropdownOpen] = useState(false);
+    const languageOptions = [
+        { value: 'en', label: 'English', flag: 'English' },
+        { value: 'sp', label: 'Spanish', flag: 'Spain' },
+        { value: 'th', label: 'Thailand', flag: 'Thailand' },
+        { value: 'vt', label: 'Vietnam', flag: 'Vietnam' },
+        // Add more language options with flags here
+    ];
+    const [selectedLanguage, setSelectedLanguage] = useState(null);
+
+    useEffect(() => {
+        const defaultLanguage = languageOptions.find(option => option.label === 'English');
+        setSelectedLanguage(defaultLanguage);
+    }, []);
+
+    const handleLanguageChange = (selectedOption) => {
+        setSelectedLanguage(selectedOption);
+    };
 
     const toggleDropdown = () => {
         setDropdownOpen(!isDropdownOpen);
@@ -14,20 +32,48 @@ const Navbar = () => {
                 <a className="normal-case text-xl"><img src="/images/header-logo.svg" /></a>
             </div>
             <div className="flex-none">
-                <select className="select w-full max-w-xs mr-3" defaultValue="English">
-                    <option>
-                        English
-                    </option>
-                    <option>
-                        Germany
-                    </option>
-                    <option>
-                        Spanish
-                    </option>
+                <div className='custom-dropdown'>
+                    <Select
+                        value={selectedLanguage}
+                        onChange={handleLanguageChange}
+                        options={languageOptions}
+                        isSearchable={false}
+                        formatOptionLabel={({ label, flag }) => (
+                            <div className="option-label flex items-center">
+                                <img src={`/images/flags/${flag}.svg`} className="mr-3" />
+                                <span>
+                                    {label}
+                                </span>
+                            </div>
+                        )}
+                        styles={{
+                            control: (provided, state) => ({
+                                ...provided,
+                                border: 'none', // Remove the border
+                            }),
+                            indicatorSeparator: (provided, state) => ({
+                                ...provided,
+                                backgroundColor: 'transparent', // Remove the separator line
+                            }),
+                            dropdownIndicator: (provided, state) => ({
+                                ...provided,
+                                color: '#ccc', // Change the color of the down caret
+                            }),
+                            option: (provided, state) => ({
+                                ...provided,
+                                display: 'flex',
+                                alignItems: 'center',
+                            }),
+                            singleValue: (provided, state) => ({
+                                ...provided,
+                                display: 'flex',
+                                alignItems: 'center',
+                            }),
+                        }}
+                    />
+                </div>
 
-                </select>
-
-                <Link className="btn btn-primary text-white mr-3" to="/login">
+                <Link className="btn btn-primary text-white mr-3 ml-3" to="/login">
                     Sign in
                 </Link>
 
