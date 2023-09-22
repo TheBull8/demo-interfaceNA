@@ -32,7 +32,7 @@ const Navbar = () => {
                 <a className="normal-case text-xl"><img src="/images/header-logo.svg" /></a>
             </div>
             <div className="flex-none">
-                <div className='custom-dropdown'>
+                {/* <div className='custom-dropdown'>
                     <Select
                         value={selectedLanguage}
                         onChange={handleLanguageChange}
@@ -71,19 +71,21 @@ const Navbar = () => {
                             }),
                         }}
                     />
-                </div>
+                </div> */}
 
-                <Link className="btn btn-primary text-white mr-3 ml-3" to="/login">
-                    Sign in
+                <Link className="btn btn-primary login_btn text-white mr-3 ml-3 py-2" to="/login">
+                    Log in
                 </Link>
 
-                <div className="dropdown dropdown-bottom dropdown-end">
-                    <label tabIndex={0} className="btn m-1"><svg xmlns="http://www.w3.org/2000/svg" fill="#000" viewBox="0 0 24 24" className="inline-block w-8 h-8 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                <div className="dropdown dropdown-bottom dropdown-end bg-white ">
+                    <label tabIndex={0} className="btn custom-dropdown bg-white border-none hover:bg-primary-light hover:text-white"><svg xmlns="http://www.w3.org/2000/svg" fill="#000" viewBox="0 0 24 24" className="inline-block w-5 h-5 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                     </label>
-                    <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-                        <li className="p-3"><a className="text-primary">About Us</a></li>
-                        <li className="p-3"><a className="text-primary ">Contact Us</a></li>
-                        <li className="p-3"><a className="text-primary ">Privacy Policy</a></li>
+                    <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-white rounded-box w-52">
+                        <li className="p-3"><a className="text-black hover:text-primary hover:bg-white">About Us</a></li>
+                        <li className="p-3"><a className="text-black hover:text-primary hover:bg-white">GA Map</a></li>
+                        <li className="p-3"><a className="text-black hover:text-primary hover:bg-white">Docs</a></li>
+                        <li className="p-3"><a className="text-black hover:text-primary hover:bg-white">Community</a></li>
+                        <li className="p-3"><a className="text-black hover:text-primary hover:bg-white">Contact Us</a></li>
                     </ul>
                 </div>
             </div>

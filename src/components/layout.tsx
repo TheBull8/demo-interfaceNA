@@ -7,7 +7,7 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
-  const [showChatBox, setShowChatBox] = useState(false);
+  const [showChatBox, setShowChatBox] = useState(true);
   const toggleChatBox = () => {
     setShowChatBox(!showChatBox);
   };

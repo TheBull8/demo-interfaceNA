@@ -72,8 +72,28 @@
     /* Enable scrolling if the sidebar content overflows */
 }
 
+.chat-input {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* Style for the input field */
+.chat-input input {
+    flex: 1;
+}
+
+.chat-input button {
+    position: absolute;
+    right: 10px;
+    top: 30px;
+    transform: translateY(-35%);
+    border: none;
+    cursor: pointer;
+}
+
 .chat-image {
-    margin-top: 8px;
+    margin-top: 22px;
     align-self: flex-start !important;
 }
 
@@ -132,7 +152,7 @@
     z-index: 4;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
-    background-color: #fff;
+    background-color: #FDEDF4;
     color: black;
 }
 
@@ -201,4 +221,14 @@
 .custom-dropdown .react-select__control:focus {
     border: none;
     box-shadow: none;
+}
+
+.login_btn {
+    min-height: 2.5rem;
+    height: 2.5rem;
+}
+
+.custom-dropdown {
+    min-height: 2.5rem;
+    height: 2.5rem;
 }

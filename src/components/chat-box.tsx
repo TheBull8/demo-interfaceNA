@@ -49,7 +49,7 @@ const ChatBox = props => {
   const handleInputKeyDown = async (event) => {
     if (event.key === 'Enter' && userInput.trim() !== '') {
       setIsLoading(true);
-      const userMessage = { text: userInput, isBot: false, senderName: "Guest", time: new Date().toLocaleTimeString(), };
+      const userMessage = { text: userInput, isBot: false, senderName: "Guest", time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }), };
       const loadingMessage = { text: 'loading', isBot: true };
 
       setMessages([...messages, userMessage, loadingMessage]);
@@ -57,7 +57,12 @@ const ChatBox = props => {
 
       try {
         const botResponse = await getChatGptResponse(userInput);
-        const botMessage = { text: botResponse, isBot: true };
+        const botMessage = {
+          text: botResponse,
+          isBot: true,
+          senderName: "GreenAnt",
+          time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        };
 
         setMessages((prevMessages) => [
           ...prevMessages.slice(0, -1), // Remove loading message
@@ -77,7 +82,7 @@ const ChatBox = props => {
       text: text,
       isBot: false,
       senderName: "Guest",
-      time: new Date().toLocaleTimeString(),
+      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
     };
     const loadingMessage = {
       text: 'loading',
@@ -91,7 +96,7 @@ const ChatBox = props => {
         text: botResponse,
         isBot: true,
         senderName: "GreenAnt",
-        time: new Date().toLocaleTimeString(),
+        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       };
 
       setMessages((prevMessages) => [
@@ -139,7 +144,36 @@ const ChatBox = props => {
       return null;
     }
   };
+  const handleSendClick = async () => {
+    if (userInput) {
+      setIsLoading(true);
+      const userMessage = { text: userInput, isBot: false, senderName: "Guest", time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }), };
+      const loadingMessage = { text: 'loading', isBot: true };
 
+      setMessages([...messages, userMessage, loadingMessage]);
+      setUserInput('');
+
+      try {
+        const botResponse = await getChatGptResponse(userInput);
+        const botMessage = {
+          text: botResponse,
+          isBot: true,
+          senderName: "GreenAnt",
+          time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        };
+
+        setMessages((prevMessages) => [
+          ...prevMessages.slice(0, -1), // Remove loading message
+          botMessage // Add bot response
+        ]);
+
+      } catch (error) {
+        console.error("Error fetching bot response:", error);
+      } finally {
+        setIsLoading(false); // Stop loading, whether the request succeeded or failed
+      }
+    }
+  }
 
 
   useEffect(() => {
@@ -147,7 +181,7 @@ const ChatBox = props => {
       text: "How can I help you?",
       isBot: true,
       senderName: "GreenAnt",
-      time: new Date().toLocaleTimeString(),
+      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
     }]);
   }, []);
 
@@ -166,31 +200,31 @@ const ChatBox = props => {
                 time={message.time}
               />
               {index === 0 ? (
-                <div className="ml-5">
+                <div className="ml-14 mr-16">
                   <h3 className="ml-2 text-gray font-bold">
                     You may select one of these topics:
                   </h3>
-                  <div className={`card my-2 w-96 bg-base-100 border-solid border-2 border-current cursor-pointer${isLoading ? ' opacity-50 pointer-events-none' : ''}`}
+                  <div className={`card my-2 w-full bg-base-100 border-solid border-2 border-current cursor-pointer${isLoading ? ' opacity-50 pointer-events-none' : ''}`}
                     onClick={(e) => sendMessage("What is GreenAnt?")}>
-                    <div className="card-body py-4 px-8 text-left">
+                    <div className="card-body py-4 px-4 text-left">
                       <h4>What is GreenAnt?</h4>
                     </div>
                   </div>
-                  <div className={`card my-2 w-96 bg-base-100 border-solid border-2 border-current cursor-pointer${isLoading ? ' opacity-50 pointer-events-none' : ''}`}
+                  <div className={`card my-2 w-full bg-base-100 border-solid border-2 border-current cursor-pointer${isLoading ? ' opacity-50 pointer-events-none' : ''}`}
                     onClick={(e) => sendMessage("How can I tokenize my trees?")}>
-                    <div className="card-body py-4 px-8 text-left">
+                    <div className="card-body py-4 px-4 text-left">
                       <h4>How can I tokenize my trees?</h4>
                     </div>
                   </div>
-                  <div className={`card my-2 w-96 bg-base-100 border-solid border-2 border-current cursor-pointer${isLoading ? ' opacity-50 pointer-events-none' : ''}`}
+                  <div className={`card my-2 w-full bg-base-100 border-solid border-2 border-current cursor-pointer${isLoading ? ' opacity-50 pointer-events-none' : ''}`}
                     onClick={(e) => sendMessage("How do I estimate my carbon footprint?")}>
-                    <div className="card-body py-4 px-8 text-left">
+                    <div className="card-body py-4 px-4 text-left">
                       <h4>How do I estimate my carbon footprint?</h4>
                     </div>
                   </div>
-                  <div className={`card my-2 w-96 bg-base-100 border-solid border-2 border-current cursor-pointer${isLoading ? ' opacity-50 pointer-events-none' : ''}`}
+                  <div className={`card my-2 w-full bg-base-100 border-solid border-2 border-current cursor-pointer${isLoading ? ' opacity-50 pointer-events-none' : ''}`}
                     onClick={(e) => sendMessage("Locate my trees")}>
-                    <div className="card-body py-4 px-8 text-left">
+                    <div className="card-body py-4 px-4 text-left">
                       <h4>Locate my trees</h4>
                     </div>
                   </div>
@@ -203,13 +237,19 @@ const ChatBox = props => {
           ))}
 
         </div>
-        <div className="chat-input text-center">
-          <input type="text" placeholder="Type in your question "
+        <div className="chat-input text-center mr-4">
+          <input type="text" placeholder="Type your command here"
             disabled={isLoading}
             onKeyDown={handleInputKeyDown}
             onChange={(event) => setUserInput(event.target.value)}
             value={userInput}
-            className="input mt-3 input-bordered input-primary w-full max-w-xs" />
+            className="input mt-3 input-bordered input-primary w-full " />
+          {!isLoading ? (
+            <button onClick={() => handleSendClick()}>
+              <img src="/images/send.svg" alt="Send" className="send-icon"></img>
+            </button>
+          ) : (<></>)}
+
         </div>
         {isBottomOverflowing && <div className="bottom-mask"></div>}
       </div>
@@ -237,18 +277,18 @@ function ChatMessage({ sender, content, senderName, time }) {
     setIsUnvoted(true)
   }
   return (
-    <div className={`chat mb-4 mr-4 chat-${sender}`}>
-      <div className="chat-header ml-7 mr-5 font-bold text-slate-500">
+    <div className={`chat mb-4 pr-4 chat-${sender}`}>
+      <div className="chat-header ml-2 mr-2 font-bold text-slate-500">
         {senderName}{content !== "loading" ? <span className="dot">&nbsp;&nbsp;•&nbsp;&nbsp;</span> : <></>}
         <time className="text-xs opacity-50">{time}</time>
       </div>
       <div className="chat-image avatar">
-        <div className="w-16 rounded-full">
+        <div className="w-10 rounded-full">
           <img src={avatarImage} alt={`Avatar of ${sender}`} />
         </div>
       </div>
-      <div className={`chat-bubble mb-8 mr-3 ml-3 ${sender === "start" ? 'bg-white' : 'bg-slate-200'} text-slate-600 `}>
-        {content === "loading" ? <span className="loading loading-dots loading-md"></span> : content}
+      <div className={`chat-bubble mb-0  px-2 ${sender === "start" ? 'bg-white' : 'bg-slate-200'} text-slate-600 `}>
+        {content === "loading" ? <span className="loading loading-dots loading-lg mt-3"></span> : content}
         {sender === 'start' && content !== 'loading' && content !== 'How can I help you?' ? (
           <div className="flex align-items-center mt-5">
             <h4 className="text-gray font-bold">Was this helpful?</h4>

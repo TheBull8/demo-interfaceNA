@@ -17,7 +17,7 @@ const Sidebar = ({ toggleChatBox }) => {
                         </div>
                     </Link>
                 </li>
-                <li>
+                {/* <li>
                     <Link className="  text-white mr-3" to="/">
                         <div className="text-center">
                             <img className="mx-auto" src="/images/cart.svg" width="40" height="40" />
@@ -29,9 +29,9 @@ const Sidebar = ({ toggleChatBox }) => {
                         </div>
                     </Link>
 
-                </li>
+                </li> */}
             </ul>
-            <ul className="sidebar-menu d-flex justify-center align-items-center">
+            {/* <ul className="sidebar-menu d-flex justify-center align-items-center">
                 <li>
                     <Link className="  text-white mr-3" to="/">
                         <div className="text-center">
@@ -44,7 +44,7 @@ const Sidebar = ({ toggleChatBox }) => {
                         </div>
                     </Link>
                 </li>
-            </ul>
+            </ul> */}
 
 
         </div>
