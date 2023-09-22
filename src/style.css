@@ -232,3 +232,8 @@
     min-height: 2.5rem;
     height: 2.5rem;
 }
+
+.custom-link:active {
+    background-color: #EA4891 !important;
+    color: white !important;
+}

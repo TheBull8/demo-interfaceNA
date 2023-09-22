@@ -78,14 +78,14 @@ const Navbar = () => {
                 </Link>
 
                 <div className="dropdown dropdown-bottom dropdown-end bg-white ">
-                    <label tabIndex={0} className="btn custom-dropdown bg-white border-none hover:bg-primary-light hover:text-white"><svg xmlns="http://www.w3.org/2000/svg" fill="#000" viewBox="0 0 24 24" className="inline-block w-5 h-5 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                    <label tabIndex={0} className="btn custom-dropdown bg-white border-none hover:bg-white hover:text-primary"><svg xmlns="http://www.w3.org/2000/svg" fill="#000" viewBox="0 0 24 24" className="inline-block w-5 h-5 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                     </label>
                     <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-white rounded-box w-52">
-                        <li className="p-3"><a className="text-black hover:text-primary hover:bg-white">About Us</a></li>
-                        <li className="p-3"><a className="text-black hover:text-primary hover:bg-white">GA Map</a></li>
-                        <li className="p-3"><a className="text-black hover:text-primary hover:bg-white">Docs</a></li>
-                        <li className="p-3"><a className="text-black hover:text-primary hover:bg-white">Community</a></li>
-                        <li className="p-3"><a className="text-black hover:text-primary hover:bg-white">Contact Us</a></li>
+                        <li className="p-3"><a className="custom-link text-black hover:text-primary hover:bg-white">About Us</a></li>
+                        <li className="p-3"><a className="custom-link text-black hover:text-primary hover:bg-white">GA Map</a></li>
+                        <li className="p-3"><a className="custom-link text-black hover:text-primary hover:bg-white">Docs</a></li>
+                        <li className="p-3"><a className="custom-link text-black hover:text-primary hover:bg-white">Community</a></li>
+                        <li className="p-3"><a className="custom-link text-black hover:text-primary hover:bg-white">Contact Us</a></li>
                     </ul>
                 </div>
             </div>
