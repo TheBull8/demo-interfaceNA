@@ -1,38 +1,56 @@
-import React, { useState, useEffect } from 'react';
-import Select from 'react-select';
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from "react";
+import Select from "react-select";
+import { Link } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Navbar = () => {
-    const [isDropdownOpen, setDropdownOpen] = useState(false);
-    const languageOptions = [
-        { value: 'en', label: 'English', flag: 'English' },
-        { value: 'sp', label: 'Spanish', flag: 'Spain' },
-        { value: 'th', label: 'Thailand', flag: 'Thailand' },
-        { value: 'vt', label: 'Vietnam', flag: 'Vietnam' },
-        // Add more language options with flags here
-    ];
-    const [selectedLanguage, setSelectedLanguage] = useState(null);
+  // login user
+  const { loginWithRedirect } = useAuth0();
 
-    useEffect(() => {
-        const defaultLanguage = languageOptions.find(option => option.label === 'English');
-        setSelectedLanguage(defaultLanguage);
-    }, []);
+  //   logout user
+  const { logout } = useAuth0();
 
-    const handleLanguageChange = (selectedOption) => {
-        setSelectedLanguage(selectedOption);
-    };
+  //   get user data
+  const { user, isAuthenticated, isLoading } = useAuth0();
 
-    const toggleDropdown = () => {
-        setDropdownOpen(!isDropdownOpen);
-    };
+  useEffect(() => {
+    console.log(user, isAuthenticated);
+  }, [user, isAuthenticated]);
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const languageOptions = [
+    { value: "en", label: "English", flag: "English" },
+    { value: "sp", label: "Spanish", flag: "Spain" },
+    { value: "th", label: "Thailand", flag: "Thailand" },
+    { value: "vt", label: "Vietnam", flag: "Vietnam" },
+    // Add more language options with flags here
+  ];
+  const [selectedLanguage, setSelectedLanguage] = useState(null);
 
-    return (
-        <div className="navbar bg-base-100">
-            <div className="flex-1">
-                <a className="normal-case text-xl"><img src="/images/header-logo.svg" /></a>
-            </div>
-            <div className="flex-none">
-                {/* <div className='custom-dropdown'>
+  useEffect(() => {
+    const defaultLanguage = languageOptions.find(
+      (option) => option.label === "English"
+    );
+    setSelectedLanguage(defaultLanguage);
+  }, []);
+
+  const handleLanguageChange = (selectedOption) => {
+    setSelectedLanguage(selectedOption);
+  };
+
+  const toggleDropdown = () => {
+    setDropdownOpen(!isDropdownOpen);
+  };
+
+  return (
+    <div className="navbar bg-base-100">
+      <div className="flex-1">
+        <a className="normal-case text-xl">
+          <img src="/images/header-logo.svg" />
+        </a>
+      </div>
+      <div className="flex-none">
+        {isAuthenticated && <h2>{`hi, ${user.given_name}`}</h2>}
+        {/* <div className='custom-dropdown'>
                     <Select
                         value={selectedLanguage}
                         onChange={handleLanguageChange}
@@ -73,24 +91,77 @@ const Navbar = () => {
                     />
                 </div> */}
 
-                <Link className="btn btn-primary login_btn text-white mr-3 ml-3 py-2" to="/login">
-                    Log in
-                </Link>
+        {isAuthenticated ? (
+          <button
+            onClick={() =>
+              logout({ logoutParams: { returnTo: window.location.origin } })
+            }
+            className="btn btn-primary login_btn text-white mr-3 ml-3 py-2"
+          >
+            Log Out
+          </button>
+        ) : (
+          <button
+            onClick={() => loginWithRedirect()}
+            className="btn btn-primary login_btn text-white mr-3 ml-3 py-2"
+          >
+            Log in
+          </button>
+        )}
 
-                <div className="dropdown dropdown-bottom dropdown-end bg-white ">
-                    <label tabIndex={0} className="btn custom-dropdown bg-white border-none hover:bg-white hover:text-primary"><svg xmlns="http://www.w3.org/2000/svg" fill="#000" viewBox="0 0 24 24" className="inline-block w-5 h-5 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-                    </label>
-                    <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-white rounded-box w-52">
-                        <li className="p-3"><a className="custom-link text-black hover:text-primary hover:bg-white">About Us</a></li>
-                        <li className="p-3"><a className="custom-link text-black hover:text-primary hover:bg-white">GA Map</a></li>
-                        <li className="p-3"><a className="custom-link text-black hover:text-primary hover:bg-white">Docs</a></li>
-                        <li className="p-3"><a className="custom-link text-black hover:text-primary hover:bg-white">Community</a></li>
-                        <li className="p-3"><a className="custom-link text-black hover:text-primary hover:bg-white">Contact Us</a></li>
-                    </ul>
-                </div>
-            </div>
+        <div className="dropdown dropdown-bottom dropdown-end bg-white ">
+          <label
+            tabIndex={0}
+            className="btn custom-dropdown bg-white border-none hover:bg-white hover:text-primary"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="#000"
+              viewBox="0 0 24 24"
+              className="inline-block w-5 h-5 stroke-current"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              ></path>
+            </svg>
+          </label>
+          <ul
+            tabIndex={0}
+            className="dropdown-content z-[1] menu p-2 shadow bg-white rounded-box w-52"
+          >
+            <li className="p-3">
+              <a className="custom-link text-black hover:text-primary hover:bg-white">
+                About Us
+              </a>
+            </li>
+            <li className="p-3">
+              <a className="custom-link text-black hover:text-primary hover:bg-white">
+                GA Map
+              </a>
+            </li>
+            <li className="p-3">
+              <a className="custom-link text-black hover:text-primary hover:bg-white">
+                Docs
+              </a>
+            </li>
+            <li className="p-3">
+              <a className="custom-link text-black hover:text-primary hover:bg-white">
+                Community
+              </a>
+            </li>
+            <li className="p-3">
+              <a className="custom-link text-black hover:text-primary hover:bg-white">
+                Contact Us
+              </a>
+            </li>
+          </ul>
         </div>
-    );
+      </div>
+    </div>
+  );
 };
 
 export default Navbar;
