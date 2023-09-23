@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { FaAngleRight, FaAngleLeft, FaThumbsUp, FaThumbsDown, FaRegThumbsUp, FaRegThumbsDown } from 'react-icons/fa';
+import { FaAngleRight, FaAngleLeft, FaThumbsUp, FaThumbsDown } from 'react-icons/fa';
 
 
 const ChatBox = props => {
@@ -51,6 +51,7 @@ const ChatBox = props => {
 
   useEffect(() => {
     scrollToBottom();
+    focusInput()
   }, [messages]);
   const handleInputKeyDown = async (event) => {
     if (event.key === 'Enter' && userInput.trim() !== '') {
@@ -117,7 +118,6 @@ const ChatBox = props => {
       setIsLoading(false); // Stop loading, whether the request succeeded or failed
     }
     scrollToBottom();
-    inputRef.current.focus();
   }
 
   const getChatGptResponse = async (question: string): Promise<string | null> => {
@@ -160,7 +160,6 @@ const ChatBox = props => {
 
       setMessages([...messages, userMessage, loadingMessage]);
       setUserInput('');
-      inputRef.current.focus();
       try {
         const botResponse = await getChatGptResponse(userInput);
         const botMessage = {
@@ -305,17 +304,17 @@ function ChatMessage({ sender, content, senderName, time }) {
               onClick={() => vote()}
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}>
-              <FaThumbsUp color={isHovered || isVoted ? `#EA4891` : `#EE71A9`} size="1.5em" />
+              <FaThumbsUp color={isHovered || isVoted ? `#EA4891` : `#B2B1AE`} size="1.5em" />
             </div>
             <div className="mx-2 mt-1 cursor-pointer"
               onClick={() => unVote()}
               onMouseEnter={() => setIsDownHovered(true)}
               onMouseLeave={() => setIsDownHovered(false)}>
-              <FaThumbsDown color={isDownHovered || isUnVoted ? `#999895` : `#B2B1AE`} size="1.5em" />
+              <FaThumbsDown color={isDownHovered || isUnVoted ? `#EA4891` : `#B2B1AE`} size="1.5em" />
             </div>
 
           </div>) : (<></>)}
-        {isVoted ? (<p className="text-slate-400 mt-3">You can also let us know what you think by typing below</p>) : (<></>)}
+        {/* {isVoted ? (<p className="text-slate-400 mt-3">You can also let us know what you think by typing below</p>) : (<></>)} */}
       </div>
     </div>
   );

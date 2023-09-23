@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import Map from 'react-map-gl';
+import Map, { NavigationControl } from 'react-map-gl';
 
 import DrawControl from '../draw-control';
 
@@ -42,7 +42,7 @@ const QueryComponent: React.FC = () => {
         });
     }, []);
 
-   
+
 
     const containerStartSpanClass = `query-span join-item w-1/6 justify-center flex ${inputFocused ? 'rounded-bl-lg' : 'rounded-l-lg'
         } bg-white text-white border-2 border-white border-r-0 px-10 bg-opacity-30`;
@@ -62,6 +62,7 @@ const QueryComponent: React.FC = () => {
                 mapStyle="mapbox://styles/mapbox/satellite-v9"
                 mapboxAccessToken={TOKEN}
             >
+                <NavigationControl position="bottom-right" />
                 <DrawControl
                     position="bottom-right"
                     displayControlsDefault={false}
