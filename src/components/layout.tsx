@@ -19,7 +19,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       </div>
       <div className="sidebar-and-content">
         {/* Sidebar */}
-        <Sidebar toggleChatBox={toggleChatBox} />
+        <Sidebar isOpen={showChatBox} toggleChatBox={toggleChatBox} />
         <ChatBox isOpen={showChatBox} toggleChatbox={toggleChatBox} />
         {/* Main content */}
         <div className="main-content">

@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom'
-const Sidebar = ({ toggleChatBox }) => {
-
+const Sidebar = ({ isOpen, toggleChatBox }) => {
+    const textColor = isOpen ? 'text-primary' : 'text-primary-gray'
     return (
         <div className="sidebar">
             <ul className="sidebar-menu d-flex justify-center align-items-center">
                 <li onClick={toggleChatBox}>
                     <Link className="  text-white mr-3" to="/">
                         <div className="text-center">
-                            <img className="mx-auto" src="/images/chat.svg" width="40" height="40" />
+                            {isOpen ? (
+                                <img className="mx-auto" src="/images/chat.svg" width="40" height="40" />
+                            ) : (<img className="mx-auto" src="/images/chat_disable.svg" width="40" height="40" />)}
                         </div>
-                        <div className="text-primary text-sm text-center mx-auto">
-                            <h6>
+                        <div className={`${textColor} text-sm text-center mx-auto`}>
+                            <h6 className='font-light'>
                                 Assistant
                             </h6>
                         </div>

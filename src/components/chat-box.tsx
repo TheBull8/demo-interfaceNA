@@ -9,6 +9,7 @@ const ChatBox = props => {
   const [messages, setMessages] = useState([]);
   const [userInput, setUserInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const inputRef = useRef(null);
 
   const [isTopOverflowing, setIsTopOverflowing] = useState(false);
   const [isBottomOverflowing, setIsBottomOverflowing] = useState(false);
@@ -19,13 +20,18 @@ const ChatBox = props => {
       chatContentRef.current.scrollTop = chatContentRef.current.scrollHeight;
     }
   };
+  const focusInput = () => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }
   useEffect(() => {
     const container = chatContentRef.current;
     const checkOverflow = () => {
       setIsTopOverflowing(container.scrollTop > 80)
       setIsBottomOverflowing(container.scrollTop + 100 <= container.scrollHeight - container.clientHeight)
     };
-
+    inputRef.current.focus();
     container.addEventListener('scroll', checkOverflow);
     checkOverflow(); // Initial check
 
@@ -111,6 +117,7 @@ const ChatBox = props => {
       setIsLoading(false); // Stop loading, whether the request succeeded or failed
     }
     scrollToBottom();
+    inputRef.current.focus();
   }
 
   const getChatGptResponse = async (question: string): Promise<string | null> => {
@@ -143,6 +150,7 @@ const ChatBox = props => {
       console.error('Request error:', error);
       return null;
     }
+
   };
   const handleSendClick = async () => {
     if (userInput) {
@@ -152,7 +160,7 @@ const ChatBox = props => {
 
       setMessages([...messages, userMessage, loadingMessage]);
       setUserInput('');
-
+      inputRef.current.focus();
       try {
         const botResponse = await getChatGptResponse(userInput);
         const botMessage = {
@@ -201,34 +209,34 @@ const ChatBox = props => {
               />
               {index === 0 ? (
                 <div className="ml-14 mr-16">
-                  <h3 className="ml-2 text-gray font-bold">
+                  <h3 className="ml-2 text-gray">
                     You may select one of these topics:
                   </h3>
                   <div className={`card my-2 w-full bg-base-100 border-solid border-2 border-current cursor-pointer${isLoading ? ' opacity-50 pointer-events-none' : ''}`}
                     onClick={(e) => sendMessage("What is GreenAnt?")}>
-                    <div className="card-body py-4 px-4 text-left">
+                    <div className="card-body py-3 px-4 text-left">
                       <h4>What is GreenAnt?</h4>
                     </div>
                   </div>
                   <div className={`card my-2 w-full bg-base-100 border-solid border-2 border-current cursor-pointer${isLoading ? ' opacity-50 pointer-events-none' : ''}`}
                     onClick={(e) => sendMessage("How can I tokenize my trees?")}>
-                    <div className="card-body py-4 px-4 text-left">
+                    <div className="card-body py-3 px-4 text-left">
                       <h4>How can I tokenize my trees?</h4>
                     </div>
                   </div>
                   <div className={`card my-2 w-full bg-base-100 border-solid border-2 border-current cursor-pointer${isLoading ? ' opacity-50 pointer-events-none' : ''}`}
                     onClick={(e) => sendMessage("How do I estimate my carbon footprint?")}>
-                    <div className="card-body py-4 px-4 text-left">
+                    <div className="card-body py-3 px-4 text-left">
                       <h4>How do I estimate my carbon footprint?</h4>
                     </div>
                   </div>
                   <div className={`card my-2 w-full bg-base-100 border-solid border-2 border-current cursor-pointer${isLoading ? ' opacity-50 pointer-events-none' : ''}`}
                     onClick={(e) => sendMessage("Locate my trees")}>
-                    <div className="card-body py-4 px-4 text-left">
+                    <div className="card-body py-3 px-4 text-left">
                       <h4>Locate my trees</h4>
                     </div>
                   </div>
-                  <h3 className="ml-2 my-5 text-gray font-bold">
+                  <h3 className="ml-2 my-5 text-gray">
                     or type what you want to do
                   </h3>
                 </div>) : (<></>)}
@@ -243,7 +251,8 @@ const ChatBox = props => {
             onKeyDown={handleInputKeyDown}
             onChange={(event) => setUserInput(event.target.value)}
             value={userInput}
-            className="input mt-3 input-bordered input-primary w-full " />
+            ref={inputRef}
+            className="input mt-3 input-bordered input-primary w-full" />
           {!isLoading ? (
             <button onClick={() => handleSendClick()}>
               <img src="/images/send.svg" alt="Send" className="send-icon"></img>
@@ -287,7 +296,7 @@ function ChatMessage({ sender, content, senderName, time }) {
           <img src={avatarImage} alt={`Avatar of ${sender}`} />
         </div>
       </div>
-      <div className={`chat-bubble mb-0  px-2 ${sender === "start" ? 'bg-white' : 'bg-slate-200'} text-slate-600 `}>
+      <div className={`chat-bubble mb-3  px-2 ${sender === "start" ? 'bg-white' : 'bg-slate-200'} text-slate-600 `}>
         {content === "loading" ? <span className="loading loading-dots loading-lg mt-3"></span> : content}
         {sender === 'start' && content !== 'loading' && content !== 'How can I help you?' ? (
           <div className="flex align-items-center mt-5">

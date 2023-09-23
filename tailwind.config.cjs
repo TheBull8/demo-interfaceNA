@@ -7,7 +7,8 @@ module.exports = {
         "primary": "#EE71A9",
         "primary-focus": "#EA4891",
         "primary-light": "#F6B6D3",
-        "primary-text": "#CCCBC8"
+        "primary-text": "#CCCBC8",
+        "primary-gray": "#807F7D"
       },
     },
   },
