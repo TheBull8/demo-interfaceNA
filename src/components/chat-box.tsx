@@ -6,15 +6,15 @@ import { useAuth0 } from "@auth0/auth0-react";
 const CHAT_ID = import.meta.env.VITE_CHAT_ID;
 const CHAT_AUTH = import.meta.env.VITE_CHAT_AUTH;
 
-const ChatBox = props => {
+const ChatBox = () => {
   const { user, isAuthenticated } = useAuth0();
-  const chatboxClass = props.isOpen ? "chatbox" : "chatbox open";
   const chatContentRef = useRef(null);
   const chatboxRef = useRef(null)
   const [messages, setMessages] = useState([]);
   const [userInput, setUserInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const inputRef = useRef(null);
+  const [isTokenTrees, setIsTokenTrees] = useState(false)
 
   const [isTopOverflowing, setIsTopOverflowing] = useState(false);
   const [isBottomOverflowing, setIsBottomOverflowing] = useState(false);
@@ -190,81 +190,73 @@ const ChatBox = props => {
   }, []);
 
   return (
-    <div className={chatboxClass} ref={chatboxRef}>
-      <div className="chat-card">
-        {isTopOverflowing && <div className="top-mask"></div>}
-        <div className="chat-content" ref={chatContentRef}>
-
-          {messages.map((message, index) => (
-            <div key={index}>
-              <ChatMessage
-                sender={message.isBot ? 'start' : 'end'}
-                content={message.text}
-                senderName={message.senderName}
-                time={message.time}
-              />
-              {index === 0 ? (
-                <div className="ml-14 mr-16 pr-1">
-                  <h6 className="ml-2 text-primary-gray">
-                    You may select one of these topics:
-                  </h6>
-                  <div className={`card my-2 w-full bg-base-100 border-solid rounded-lg border-2 border-current hover:bg-light-gray cursor-pointer${isLoading ? ' opacity-50 pointer-events-none' : ''}`}
-                    onClick={(e) => sendMessage("What is GreenAnt?")}>
-                    <div className="card-body py-2 px-4 text-left font-bold text-primary-text">
-                      <h4>What is GreenAnt?</h4>
-                    </div>
+    <div className="chat-card">
+      {isTopOverflowing && <div className="top-mask"></div>}
+      <div className="chat-content" ref={chatContentRef}>
+        {messages.map((message, index) => (
+          <div key={index}>
+            <ChatMessage
+              sender={message.isBot ? 'start' : 'end'}
+              content={message.text}
+              senderName={message.senderName}
+              time={message.time}
+            />
+            {index === 0 ? (
+              <div className="ml-14 mr-16 pr-1">
+                <h6 className="ml-2 text-primary-gray">
+                  You may select one of these topics:
+                </h6>
+                <div className={`card my-2 w-full bg-base-100 border-solid rounded-lg border-2 border-current hover:bg-light-gray cursor-pointer${isLoading ? ' opacity-50 pointer-events-none' : ''}`}
+                  onClick={(e) => sendMessage("What is GreenAnt?")}>
+                  <div className="card-body py-2 px-4 text-left font-bold text-primary-text">
+                    <h4>What is GreenAnt?</h4>
                   </div>
-                  <div className={`card my-2 w-full bg-base-100 border-solid rounded-lg border-2 border-current hover:bg-light-gray cursor-pointer${isLoading ? ' opacity-50 pointer-events-none' : ''}`}
-                    onClick={(e) => sendMessage("How can I tokenize my trees?")}>
-                    <div className="card-body py-2 px-4 text-left font-bold text-primary-text">
-                      <h4>How can I tokenize my trees?</h4>
-                    </div>
+                </div>
+                <div className={`card my-2 w-full bg-base-100 border-solid rounded-lg border-2 border-current hover:bg-light-gray cursor-pointer${isLoading ? ' opacity-50 pointer-events-none' : ''}`}
+                  onClick={(e) => sendMessage("How can I tokenize my trees?")}>
+                  <div className="card-body py-2 px-4 text-left font-bold text-primary-text">
+                    <h4>How can I tokenize my trees?</h4>
                   </div>
-                  <div className={`card my-2 w-full bg-base-100 border-solid rounded-lg border-2 border-current hover:bg-light-gray cursor-pointer${isLoading ? ' opacity-50 pointer-events-none' : ''}`}
-                    onClick={(e) => sendMessage("How do I estimate my carbon footprint?")}>
-                    <div className="card-body py-2 px-4 text-left font-bold text-primary-text">
-                      <h4>How do I estimate my carbon footprint?</h4>
-                    </div>
+                </div>
+                <div className={`card my-2 w-full bg-base-100 border-solid rounded-lg border-2 border-current hover:bg-light-gray cursor-pointer${isLoading ? ' opacity-50 pointer-events-none' : ''}`}
+                  onClick={(e) => sendMessage("How do I estimate my carbon footprint?")}>
+                  <div className="card-body py-2 px-4 text-left font-bold text-primary-text">
+                    <h4>How do I estimate my carbon footprint?</h4>
                   </div>
-                  <div className={`card my-2 w-full bg-base-100 border-solid rounded-lg border-2 border-current hover:bg-light-gray cursor-pointer${isLoading ? ' opacity-50 pointer-events-none' : ''}`}
-                    onClick={(e) => sendMessage("Locate my trees")}>
-                    <div className="card-body py-2 px-4 text-left font-bold text-primary-text">
-                      <h4>Locate my trees</h4>
-                    </div>
+                </div>
+                <div className={`card my-2 w-full bg-base-100 border-solid rounded-lg border-2 border-current hover:bg-light-gray cursor-pointer${isLoading ? ' opacity-50 pointer-events-none' : ''}`}
+                  onClick={(e) => sendMessage("Locate my trees")}>
+                  <div className="card-body py-2 px-4 text-left font-bold text-primary-text">
+                    <h4>Locate my trees</h4>
                   </div>
-                  <h6 className="ml-2 my-5 text-primary-gray">
-                    or type what you want to do
-                  </h6>
-                </div>) : (<></>)}
+                </div>
+                <h6 className="ml-2 my-5 text-primary-gray">
+                  or type what you want to do
+                </h6>
+              </div>) : (<></>)}
 
-            </div>
-          ))}
-
-        </div>
-        <div className="chat-input text-center mr-4">
-          <input type="text" placeholder="Type your command here"
-            disabled={isLoading}
-            onKeyDown={handleInputKeyDown}
-            onChange={(event) => setUserInput(event.target.value)}
-            value={userInput}
-            ref={inputRef}
-            className="input mt-3 input-bordered rounded border-border-gray input-primary w-full pr-10" />
-          {!isLoading ? (
-            <button onClick={() => handleSendClick()}>
-              {userInput.length === 0 ?
-                <img src="/images/send_gray.svg" alt="Send" className="send-icon"></img> :
-                <img src="/images/send.svg" alt="Send" className="send-icon"></img>
-              }
-            </button>
-          ) : (<></>)}
-
-        </div>
-        {isBottomOverflowing && <div className="bottom-mask"></div>}
+          </div>
+        ))}
       </div>
-      <button onClick={props.toggleChatbox} className="chatbox-toggle pl-1">
-        {props.isOpen ? <FaAngleLeft size="2em" /> : <FaAngleRight size="2em" />}
-      </button>
-    </div >
+      <div className="chat-input text-center mr-4">
+        <input type="text" placeholder="Type your command here"
+          disabled={isLoading}
+          onKeyDown={handleInputKeyDown}
+          onChange={(event) => setUserInput(event.target.value)}
+          value={userInput}
+          ref={inputRef}
+          className="input mt-3 input-bordered rounded border-border-gray input-primary w-full pr-10" />
+        {!isLoading ? (
+          <button onClick={() => handleSendClick()}>
+            {userInput.length === 0 ?
+              <img src="/images/send_gray.svg" alt="Send" className="send-icon"></img> :
+              <img src="/images/send.svg" alt="Send" className="send-icon"></img>
+            }
+          </button>
+        ) : (<></>)}
+      </div>
+      {isBottomOverflowing && <div className="bottom-mask"></div>}
+    </div>
   );
 };
 export default ChatBox;

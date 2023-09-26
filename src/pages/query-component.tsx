@@ -256,7 +256,6 @@ const QueryComponent: React.FC = () => {
         console.log("FEATURES", features)
     }
 
-
     return (
         <>
             <dialog id="my_modal" className="modal modal-bottom sm:modal-middle">

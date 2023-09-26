@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom'
-const Sidebar = ({ isOpen, toggleChatBox }) => {
+const Sidebar = ({ isOpen, toggleBox }) => {
     const textColor = isOpen ? 'text-primary' : 'text-primary-gray'
     return (
         <div className="sidebar">
             <ul className="sidebar-menu d-flex justify-center align-items-center">
-                <li onClick={toggleChatBox}>
+                <li onClick={toggleBox}>
                     <Link className="text-white mr-3" to="/">
                         <div className="text-center">
                             {isOpen ? (

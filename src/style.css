@@ -153,6 +153,17 @@
     color: black;
 }
 
+.tree-buttons {
+    position: absolute;
+    top: 100px;
+    right: -360px;
+    z-index: 7;
+}
+
+.tree-buttons button{
+    text-transform: none;
+}
+
 .content {
     position: absolute;
     top: 60px;
@@ -177,6 +188,13 @@
     display: flex;
     flex-direction: column;
     height: calc(100% - 140px);
+}
+
+.token-card {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 210px);
 }
 
 .chat-content {
@@ -235,5 +253,3 @@
     background-color: #3394EE !important;
     color: white !important;
 }
-
-

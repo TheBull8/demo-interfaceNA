@@ -9,7 +9,7 @@ module.exports = {
         "primary-light": "#F6B6D3",
         "primary-text": "#666564",
         "primary-gray": "#807F7D",
-        "border-gray" : "#B2B1AE",
+        "border-gray": "#B2B1AE",
         "light-gray": "#E5E4E0"
       },
     },
