@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { FaAngleRight, FaAngleLeft, FaThumbsUp, FaThumbsDown } from 'react-icons/fa';
+import { FaAngleRight, FaAngleLeft, FaThumbsUp, FaThumbsDown, FaRegThumbsDown } from 'react-icons/fa6';
 import { useAuth0 } from "@auth0/auth0-react";
 
 
@@ -204,37 +204,37 @@ const ChatBox = props => {
                 time={message.time}
               />
               {index === 0 ? (
-                <div className="ml-14 mr-16">
-                  <h3 className="ml-2 text-gray">
+                <div className="ml-14 mr-16 pr-1">
+                  <h6 className="ml-2 text-primary-gray">
                     You may select one of these topics:
-                  </h3>
-                  <div className={`card my-2 w-full bg-base-100 border-solid border-2 border-current cursor-pointer${isLoading ? ' opacity-50 pointer-events-none' : ''}`}
+                  </h6>
+                  <div className={`card my-2 w-full bg-base-100 border-solid rounded-lg border-2 border-current hover:bg-light-gray cursor-pointer${isLoading ? ' opacity-50 pointer-events-none' : ''}`}
                     onClick={(e) => sendMessage("What is GreenAnt?")}>
-                    <div className="card-body py-3 px-4 text-left">
+                    <div className="card-body py-2 px-4 text-left font-bold text-primary-text">
                       <h4>What is GreenAnt?</h4>
                     </div>
                   </div>
-                  <div className={`card my-2 w-full bg-base-100 border-solid border-2 border-current cursor-pointer${isLoading ? ' opacity-50 pointer-events-none' : ''}`}
+                  <div className={`card my-2 w-full bg-base-100 border-solid rounded-lg border-2 border-current hover:bg-light-gray cursor-pointer${isLoading ? ' opacity-50 pointer-events-none' : ''}`}
                     onClick={(e) => sendMessage("How can I tokenize my trees?")}>
-                    <div className="card-body py-3 px-4 text-left">
+                    <div className="card-body py-2 px-4 text-left font-bold text-primary-text">
                       <h4>How can I tokenize my trees?</h4>
                     </div>
                   </div>
-                  <div className={`card my-2 w-full bg-base-100 border-solid border-2 border-current cursor-pointer${isLoading ? ' opacity-50 pointer-events-none' : ''}`}
+                  <div className={`card my-2 w-full bg-base-100 border-solid rounded-lg border-2 border-current hover:bg-light-gray cursor-pointer${isLoading ? ' opacity-50 pointer-events-none' : ''}`}
                     onClick={(e) => sendMessage("How do I estimate my carbon footprint?")}>
-                    <div className="card-body py-3 px-4 text-left">
+                    <div className="card-body py-2 px-4 text-left font-bold text-primary-text">
                       <h4>How do I estimate my carbon footprint?</h4>
                     </div>
                   </div>
-                  <div className={`card my-2 w-full bg-base-100 border-solid border-2 border-current cursor-pointer${isLoading ? ' opacity-50 pointer-events-none' : ''}`}
+                  <div className={`card my-2 w-full bg-base-100 border-solid rounded-lg border-2 border-current hover:bg-light-gray cursor-pointer${isLoading ? ' opacity-50 pointer-events-none' : ''}`}
                     onClick={(e) => sendMessage("Locate my trees")}>
-                    <div className="card-body py-3 px-4 text-left">
+                    <div className="card-body py-2 px-4 text-left font-bold text-primary-text">
                       <h4>Locate my trees</h4>
                     </div>
                   </div>
-                  <h3 className="ml-2 my-5 text-gray">
+                  <h6 className="ml-2 my-5 text-primary-gray">
                     or type what you want to do
-                  </h3>
+                  </h6>
                 </div>) : (<></>)}
 
             </div>
@@ -248,10 +248,13 @@ const ChatBox = props => {
             onChange={(event) => setUserInput(event.target.value)}
             value={userInput}
             ref={inputRef}
-            className="input mt-3 input-bordered input-primary w-full" />
+            className="input mt-3 input-bordered rounded border-border-gray input-primary w-full pr-10" />
           {!isLoading ? (
             <button onClick={() => handleSendClick()}>
-              <img src="/images/send.svg" alt="Send" className="send-icon"></img>
+              {userInput.length === 0 ?
+                <img src="/images/send_gray.svg" alt="Send" className="send-icon"></img> :
+                <img src="/images/send.svg" alt="Send" className="send-icon"></img>
+              }
             </button>
           ) : (<></>)}
 
@@ -261,7 +264,7 @@ const ChatBox = props => {
       <button onClick={props.toggleChatbox} className="chatbox-toggle pl-1">
         {props.isOpen ? <FaAngleLeft size="2em" /> : <FaAngleRight size="2em" />}
       </button>
-    </div>
+    </div >
   );
 };
 export default ChatBox;
@@ -271,7 +274,7 @@ function ChatMessage({ sender, content, senderName, time }) {
   const avatarImage = sender === 'start' ? '/images/ant_logo.svg' : '/images/avatar.svg';
   const [isHovered, setIsHovered] = useState(false);
   const [isDownHovered, setIsDownHovered] = useState(false)
-  const [isVoted, setIsVoted] = useState(false);
+  const [isVoted, setIsVoted] = useState(true);
   const [isUnVoted, setIsUnvoted] = useState(false)
   const vote = () => {
     setIsVoted(true)
@@ -282,8 +285,8 @@ function ChatMessage({ sender, content, senderName, time }) {
     setIsUnvoted(true)
   }
   return (
-    <div className={`chat mb-4 pr-4 chat-${sender}`}>
-      <div className="chat-header ml-2 mr-2 font-bold text-slate-500">
+    <div className={`chat mb-2 pr-4 chat-${sender}`}>
+      <div className="chat-header ml-4 mr-2 font-bold text-slate-500">
         {senderName}{content !== "loading" ? <span className="dot">&nbsp;&nbsp;•&nbsp;&nbsp;</span> : <></>}
         <time className="text-xs opacity-50">{time}</time>
       </div>
@@ -292,11 +295,11 @@ function ChatMessage({ sender, content, senderName, time }) {
           <img src={avatarImage} alt={`Avatar of ${sender}`} />
         </div>
       </div>
-      <div className={`chat-bubble mb-3  px-2 ${sender === "start" ? 'bg-white' : 'bg-slate-200'} text-slate-600 `}>
-        {content === "loading" ? <span className="loading loading-dots loading-lg mt-3"></span> : content}
+      <div className={`chat-bubble max-w-[86%] mb-3 px-4 ${sender === "start" ? 'bg-white' : 'bg-light-gray'} rounded-lg text-slate-600 `}>
+        {content === "loading" ? <span className="loading loading-dots loading-lg"></span> : content}
         {sender === 'start' && content !== 'loading' && content !== 'How can I help you?' ? (
           <div className="flex align-items-center mt-5">
-            <h4 className="text-gray font-bold">Was this helpful?</h4>
+            <h6 className="text-primary-gray mt-1">Was this helpful?</h6>
             <div className="ml-5 mr-2 cursor-pointer"
               onClick={() => vote()}
               onMouseEnter={() => setIsHovered(true)}
@@ -307,7 +310,7 @@ function ChatMessage({ sender, content, senderName, time }) {
               onClick={() => unVote()}
               onMouseEnter={() => setIsDownHovered(true)}
               onMouseLeave={() => setIsDownHovered(false)}>
-              <FaThumbsDown color={isDownHovered || isUnVoted ? `#3394EE` : `#B2B1AE`} size="1.5em" />
+              <FaRegThumbsDown color={isDownHovered || isUnVoted ? `#3394EE` : `#B2B1AE`} size="1.5em" />
             </div>
 
           </div>) : (<></>)}

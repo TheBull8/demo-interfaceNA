@@ -9,8 +9,8 @@ const Sidebar = ({ isOpen, toggleChatBox }) => {
                     <Link className="text-white mr-3" to="/">
                         <div className="text-center">
                             {isOpen ? (
-                                <img className="mx-auto" src="/images/chat.svg" width="40" height="40" />
-                            ) : (<img className="mx-auto" src="/images/chat_disable.svg" width="40" height="40" />)}
+                                <img className="mx-auto" src="/images/chat.svg" width="30" height="30" />
+                            ) : (<img className="mx-auto" src="/images/chat_disable.svg" width="30" height="30" />)}
                         </div>
                         <div className={`${textColor} text-sm text-center mx-auto`}>
                             <h6 className='font-light'>

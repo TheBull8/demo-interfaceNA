@@ -93,12 +93,11 @@
 }
 
 .chat-image {
-    margin-top: 22px;
     align-self: flex-start !important;
 }
 
 .chat-bubble {
-    border-radius: 12px !important;
+    border-radius: 8px !important;
 }
 
 .chat-bubble::before {
