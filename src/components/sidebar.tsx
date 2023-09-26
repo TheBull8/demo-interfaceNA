@@ -6,7 +6,7 @@ const Sidebar = ({ isOpen, toggleChatBox }) => {
         <div className="sidebar">
             <ul className="sidebar-menu d-flex justify-center align-items-center">
                 <li onClick={toggleChatBox}>
-                    <Link className="  text-white mr-3" to="/">
+                    <Link className="text-white mr-3" to="/">
                         <div className="text-center">
                             {isOpen ? (
                                 <img className="mx-auto" src="/images/chat.svg" width="40" height="40" />

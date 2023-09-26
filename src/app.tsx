@@ -6,9 +6,6 @@ import "./App.css";
 import "./style.css";
 
 import QueryComponent from "./pages/query-component";
-import ChatComponent from "./pages/chat-component";
-import DrawComponent from "./pages/draw-component";
-import LoginComponent from "./pages/login-component";
 import Layout from "./components/layout";
 
 export default function App() {
@@ -17,9 +14,6 @@ export default function App() {
       <Layout>
         <Routes>
           <Route path="/" element={<QueryComponent />} />
-          <Route path="/chat" element={<ChatComponent />} />
-          <Route path="/draw" element={<DrawComponent />} />
-          <Route path="/login" element={<LoginComponent />} />
         </Routes>
       </Layout>
     </Router>

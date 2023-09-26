@@ -4,11 +4,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        "primary": "#EE71A9",
+        "primary": "#3394EE",
         "primary-focus": "#EA4891",
         "primary-light": "#F6B6D3",
         "primary-text": "#CCCBC8",
-        "primary-gray": "#807F7D"
+        "primary-gray": "#807F7D",
+        "light-gray": "#E5E4E0"
       },
     },
   },
@@ -17,7 +18,7 @@ module.exports = {
       {
         light: {
           ...require("daisyui/src/theming/themes")["[data-theme=light]"],
-          "primary": "#EE71A9",
+          "primary": "#3394EE",
         },
       },
     ],

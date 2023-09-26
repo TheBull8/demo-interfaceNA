@@ -13,9 +13,6 @@ const Navbar = () => {
   //   get user data
   const { user, isAuthenticated, isLoading } = useAuth0();
 
-  useEffect(() => {
-    console.log(user, isAuthenticated);
-  }, [user, isAuthenticated]);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const languageOptions = [
     { value: "en", label: "English", flag: "English" },

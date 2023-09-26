@@ -1,8 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FaAngleRight, FaAngleLeft, FaThumbsUp, FaThumbsDown } from 'react-icons/fa';
+import { useAuth0 } from "@auth0/auth0-react";
 
+
+const CHAT_ID = import.meta.env.VITE_CHAT_ID;
+const CHAT_AUTH = import.meta.env.VITE_CHAT_AUTH;
 
 const ChatBox = props => {
+  const { user, isAuthenticated } = useAuth0();
   const chatboxClass = props.isOpen ? "chatbox" : "chatbox open";
   const chatContentRef = useRef(null);
   const chatboxRef = useRef(null)
@@ -13,7 +18,7 @@ const ChatBox = props => {
 
   const [isTopOverflowing, setIsTopOverflowing] = useState(false);
   const [isBottomOverflowing, setIsBottomOverflowing] = useState(false);
-  const [isExpanded, setIsExpanded] = useState(false)
+
 
   const scrollToBottom = () => {
     if (chatContentRef.current) {
@@ -39,15 +44,6 @@ const ChatBox = props => {
       container.removeEventListener('scroll', checkOverflow);
     };
   }, []);
-  useEffect(() => {
-    if (props.isOpen === true) {
-      setTimeout(() => {
-        setIsExpanded(true);
-      }, 200);
-    } else if (props.isOpen === false) {
-      setIsExpanded(false)
-    }
-  }, [props]);
 
   useEffect(() => {
     scrollToBottom();
@@ -56,7 +52,7 @@ const ChatBox = props => {
   const handleInputKeyDown = async (event) => {
     if (event.key === 'Enter' && userInput.trim() !== '') {
       setIsLoading(true);
-      const userMessage = { text: userInput, isBot: false, senderName: "Guest", time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }), };
+      const userMessage = { text: userInput, isBot: false, senderName: user ? user.given_name : "Guest", time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }), };
       const loadingMessage = { text: 'loading', isBot: true };
 
       setMessages([...messages, userMessage, loadingMessage]);
@@ -88,7 +84,7 @@ const ChatBox = props => {
     const userMessage = {
       text: text,
       isBot: false,
-      senderName: "Guest",
+      senderName: user ? user.given_name : "Guest",
       time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
     };
     const loadingMessage = {
@@ -121,27 +117,28 @@ const ChatBox = props => {
   }
 
   const getChatGptResponse = async (question: string): Promise<string | null> => {
-    const url = 'https://bot-j3so72lbva-uc.a.run.app/ask-whitepaper/';
+    const url = 'https://www.chatbase.co/api/v1/chat';
 
-    const headers = {
-      'accept': 'application/json',
-      'Content-Type': 'application/json',
-    };
-
-    const data = {
-      question,
+    const options = {
+      method: 'POST',
+      headers: {
+        accept: 'application/json',
+        'content-type': 'application/json',
+        authorization: CHAT_AUTH
+      },
+      body: JSON.stringify({
+        stream: false,
+        temperature: 0,
+        messages: [{ role: 'user', content: question }],
+        chatId: CHAT_ID
+      })
     };
 
     try {
-      const response = await fetch(url, {
-        method: 'POST',
-        headers,
-        body: JSON.stringify(data),
-      });
-
+      const response = await fetch(url, options);
       if (response.ok) {
         const result = await response.json();
-        return result.answer;
+        return result.text;
       } else {
         console.error(`Request failed with status code ${response.status}`);
         return null;
@@ -155,7 +152,7 @@ const ChatBox = props => {
   const handleSendClick = async () => {
     if (userInput) {
       setIsLoading(true);
-      const userMessage = { text: userInput, isBot: false, senderName: "Guest", time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }), };
+      const userMessage = { text: userInput, isBot: false, senderName: user ? user.given_name : "Guest", time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }), };
       const loadingMessage = { text: 'loading', isBot: true };
 
       setMessages([...messages, userMessage, loadingMessage]);
@@ -304,13 +301,13 @@ function ChatMessage({ sender, content, senderName, time }) {
               onClick={() => vote()}
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}>
-              <FaThumbsUp color={isHovered || isVoted ? `#EA4891` : `#B2B1AE`} size="1.5em" />
+              <FaThumbsUp color={isHovered || isVoted ? `#3394EE` : `#B2B1AE`} size="1.5em" />
             </div>
             <div className="mx-2 mt-1 cursor-pointer"
               onClick={() => unVote()}
               onMouseEnter={() => setIsDownHovered(true)}
               onMouseLeave={() => setIsDownHovered(false)}>
-              <FaThumbsDown color={isDownHovered || isUnVoted ? `#EA4891` : `#B2B1AE`} size="1.5em" />
+              <FaThumbsDown color={isDownHovered || isUnVoted ? `#3394EE` : `#B2B1AE`} size="1.5em" />
             </div>
 
           </div>) : (<></>)}
