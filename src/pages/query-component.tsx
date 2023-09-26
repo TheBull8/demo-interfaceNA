@@ -6,7 +6,6 @@ import DrawControl from '../draw-control';
 
 const TOKEN = import.meta.env.VITE_MAPBOX_KEY;
 
-
 interface PolygonData {
     type: string;
     geometry: {
@@ -26,8 +25,6 @@ interface PolygonData {
         projection: string;
     };
 }
-
-
 
 const layerStyle: FillLayer = {
     id: 'point',
