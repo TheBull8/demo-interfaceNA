@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { FaPen, FaRegCircleXmark } from 'react-icons/fa6';
 import { useAuth0 } from "@auth0/auth0-react";
-
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const CHAT_ID = import.meta.env.VITE_CHAT_ID;
 const CHAT_AUTH = import.meta.env.VITE_CHAT_AUTH;
@@ -19,7 +19,6 @@ const TokenTree = () => {
     return (
         <>
             <h1 className="text-xl font-bold mt-[110px] ml-12 pb-5">My tokenized trees</h1>
-
             <div className="token-card overflow-y-auto">
                 <TreeItem />
                 <TreeItem />
@@ -45,7 +44,7 @@ const TreeItem = () => {
                         <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
                     </form>
                     <div className="flex flex-col justify-center py-3 " onClick={() => document.getElementById('my_modal1').showModal()}>
-                        <img src="/images/alt-modal.svg" alt="Send" className="send-icon mt-4"></img>
+                        <LazyLoadImage src="/images/alt-modal.svg" alt="Send" className="send-icon mt-4" />
                         <h1 className="text-xl font-bold mt-5">Project Sputnik</h1>
                         <p className="text-primary-gray text-sm mt-5">20kg carbon stored as of date</p>
                         <div className="divider my-2"></div>
@@ -87,7 +86,7 @@ const TreeItem = () => {
                 </div>
             </dialog>
             <div className="flex justify-center border-b-[2px] py-3 cursor-pointer hover:bg-light-gray" onClick={() => document.getElementById('my_modal1').showModal()}>
-                <img src="/images/alt-img.svg" width={100} alt="Send" className="send-icon"></img>
+                <LazyLoadImage src="/images/alt-img.svg" width={100} alt="Send" className="send-icon" />
                 <div className="flex flex-col ml-5">
                     <h1 className="text-xl font-bold">Project Sputnik</h1>
                     <p className="text-primary-gray text-sm">20kg carbon stored as of date</p>
@@ -107,7 +106,6 @@ const TreeItem = () => {
                 </div>
             </div>
         </>
-
     )
 }
 

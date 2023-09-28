@@ -4,11 +4,7 @@ import ChatBox from "./chat-box";
 import TokenTree from "./token-tree";
 
 const BoxContainer = props => {
-
     const chatboxClass = props.isOpen ? "chatbox" : "chatbox open";
-    const chatContentRef = useRef(null);
-
-
 
     return (
         <div className={chatboxClass}>
