@@ -21,7 +21,7 @@ import {
 interface LayoutProps {
   children?: ReactNode; // Make the children prop optional
 }
-const projectId = "fdd3ad5166ade5a58de9c482b8c62430";
+const projectId = import.meta.env.VITE_PROJECT_ID;
 
 const metadata = {
   name: "Web3Modal",
