@@ -47,6 +47,8 @@ createWeb3Modal({ wagmiConfig, projectId, chains });
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [showBox, setShowBox] = useState(true);
   const [componentName, setComponentName] = useState("chat");
+
+  const [hoveredData, setHoveredData] = useState<HoveredData | null>(null);
   const toggleBox = () => {
     setShowBox(!showBox);
   };
@@ -58,6 +60,16 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     setShowBox(true);
     setComponentName("token");
   };
+  const handleProfileName = () => {
+    setShowBox(true);
+    setComponentName('profile')
+  }
+  const handleHoverTokenTree = (hoveredData) => {
+    // Do something with the hovered data in the great-grandparent component
+    setHoveredData(hoveredData);
+    console.log(hoveredData)
+  };
+
   return (
     <WagmiConfig config={wagmiConfig}>
       <div className="layout">
@@ -67,7 +79,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         </div>
         <div className="sidebar-and-content">
           {/* Sidebar */}
-          <Sidebar isOpen={showBox} toggleBox={handleSideBarButton} />
+          <Sidebar isOpen={showBox} toggleBox={handleSideBarButton} setComponentName={handleProfileName} />
           <BoxContainer
             isOpen={showBox}
             togglebox={toggleBox}

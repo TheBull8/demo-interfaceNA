@@ -160,7 +160,7 @@
     z-index: 7;
 }
 
-.tree-buttons button{
+.tree-buttons button {
     text-transform: none;
 }
 
@@ -190,11 +190,22 @@
     height: calc(100% - 140px);
 }
 
+.custom-outline:hover {
+    color: white !important
+}
+
 .token-card {
     margin-top: 10px;
     display: flex;
     flex-direction: column;
     height: calc(100% - 210px);
+}
+
+.profile-container {
+    padding-top: 90px;
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 20px);
 }
 
 .chat-content {

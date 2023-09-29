@@ -7,13 +7,17 @@ import "./style.css";
 
 import QueryComponent from "./pages/query-component";
 import Layout from "./components/layout";
-
+interface HoveredData {
+  lat: number;
+  lon: number;
+  index: number;
+}
 export default function App() {
   return (
     <Router>
       <Layout>
         <Routes>
-          <Route path="/" element={<QueryComponent />} />
+          <Route path="/" element={<QueryComponent  />} />
         </Routes>
       </Layout>
     </Router>

@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import Map, { NavigationControl, Layer, Source, Popup } from 'react-map-gl';
+import React, { useState, useRef, useCallback, useMemo, useEffect } from 'react';
+import Map, { NavigationControl, Layer, Source, Popup, Marker } from 'react-map-gl';
 import type { FillLayer, } from 'react-map-gl'
 
 import DrawControl from '../draw-control';
+import mapboxgl from 'mapbox-gl';
 
 const TOKEN = import.meta.env.VITE_MAPBOX_KEY;
 
@@ -42,115 +43,41 @@ const layerStyle1: FillLayer = {
         'fill-opacity': 0.3
     }
 };
+interface HoveredData {
+    lat: number;
+    lon: number;
+    index: number;
+}
+interface ChildComponentProps {
+    hoveredData: HoveredData | null;
+    // ...other props
+}
 
+// const coordinates = [
+//     [102.0835727024093, 14.972782907195878],
+//     [102.08245690345836, 14.970274664701037],
+//     [102.07771475791998, 14.971787905422005],
+//     [102.07804735183862, 14.967714568737605],
+//     [102.08642657280194, 14.966201299252418],
+//     [102.08680208206363, 14.968139526055339],
+//     [102.08907659530837, 14.971476966420795],
+//     [102.08406622886764, 14.969321110264545],
+//     [102.08406622886764, 14.97056487607854],
+//     [102.08506401062186, 14.971860457791223],
+// ];
 
-
-const QueryComponent: React.FC = () => {
-
+const QueryComponent: React.FC<ChildComponentProps> = ({ hoveredData }) => {
+    console.log("hoveredData in QueryComponent:", hoveredData);
     const [features, setFeatures] = useState<PolygonData[]>();
     const [showPopup, setShowPopup] = useState<boolean>(true);
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    // const [markerColors, setMarkerColors] = useState(new Array(coordinates.length).fill('red'));
     const [confirmationData, setConfirmationData] = useState(null);
-    const geojson = {
-        type: "FeatureCollection",
-        features: [
-            {
-                type: "Feature",
-                properties: {
-                    text: "Fort Greene"
-                },
-                geometry: {
-                    type: "Polygon",
-                    coordinates: [
-                        [
-                            [
-                                102.08061154365737,
-                                14.967559096338093
-                            ],
-                            [
-                                102.08363707542554,
-                                14.968605941653237
-                            ],
-                            [
-                                102.08112652778726,
-                                14.969321110264545
-                            ],
-                            [
-                                102.0791416931163,
-                                14.969714970220394
-                            ],
-                            [
-                                102.07857306480594,
-                                14.971238579546494
-                            ],
-                            [
-                                102.07730706215108,
-                                14.968605941653237
-                            ],
-                            [
-                                102.08061154365737,
-                                14.967559096338093
-                            ]
-                        ],
 
-                    ]
-                }
-            },
-        ]
-    };
-    const geojson1 = {
-        type: "FeatureCollection",
-        features: [
-            {
-                type: "Feature",
-                properties: {
-                    text: "Fort Greene"
-                },
-                geometry: {
-                    type: "Polygon",
-                    coordinates: [
+    const markerRef = useRef<mapboxgl.Marker>();
 
-                        [
-                            [
-                                102.08454902649027,
-                                14.972161031628588
-                            ],
-                            [
-                                102.08446319580253,
-                                14.970647793542895
-                            ],
-                            [
-                                102.08774621963732,
-                                14.970616699497626
-                            ],
-                            [
-                                102.08649094599133,
-                                14.973021292361992
-                            ],
-                            [
-                                102.08510692613788,
-                                14.972948740410061
-                            ],
-                            [
-                                102.08475287454951,
-                                14.973311500019136
-                            ],
-                            [
-                                102.08189900415681,
-                                14.97239941748667
-                            ],
-                            [
-                                102.08454902649027,
-                                14.972161031628588
-                            ]
-                        ]
-
-                    ]
-                }
-            },
-        ]
-    };
-
+    const popup = useMemo(() => {
+        return new mapboxgl.Popup().setText('Hello world!');
+    }, [])
 
 
 
@@ -256,25 +183,26 @@ const QueryComponent: React.FC = () => {
         console.log("FEATURES", features)
     }
 
+
     return (
         <>
-            <dialog id="my_modal" className="modal modal-bottom sm:modal-middle">
-                <div className="modal-box">
-                    <h3 className="font-bold text-lg">Confirm</h3>
-                    <p className="py-4">Are you sure wish to tokenize this area?</p>
-                    <div className="modal-action">
-                        <form method="dialog">
-                            {/* if there is a button in form, it will close the modal */}
-                            <button className="btn btn-primary text-white mr-3 w-24"
-                                onClick={() => handleConfirm()}>
-                                Yes
-                            </button>
-                            <button className="btn w-24">Cancel</button>
-                        </form>
-                    </div>
-                </div>
-            </dialog>
             <div className="query-container relative">
+                <dialog id="my_modal" className="modal modal-bottom sm:modal-middle">
+                    <div className="modal-box">
+                        <h3 className="font-bold text-lg">Confirm</h3>
+                        <p className="py-4">Are you sure wish to tokenize this area?</p>
+                        <div className="modal-action">
+                            <form method="dialog">
+                                {/* if there is a button in form, it will close the modal */}
+                                <button className="btn btn-primary text-white mr-3 w-24"
+                                    onClick={() => handleConfirm()}>
+                                    Yes
+                                </button>
+                                <button className="btn w-24">Cancel</button>
+                            </form>
+                        </div>
+                    </div>
+                </dialog>
                 {/* <button className='btn btn-primary fixed top-32 right-16 z-20' onClick={() => handleConsole()} >Delete</button> */}
 
                 <Map
@@ -287,6 +215,11 @@ const QueryComponent: React.FC = () => {
                     mapStyle="mapbox://styles/mapbox/satellite-v9"
                     mapboxAccessToken={TOKEN}
                 >
+                    {/* {coordinates.map((coords, index) => (
+                        <Marker key={index} longitude={coords[0]} latitude={coords[1]}
+                            color={markerColors[index]}
+                            ref={markerRef} />
+                    ))} */}
                     <NavigationControl position="bottom-right" />
                     <DrawControl
                         position="bottom-right"

@@ -2,14 +2,16 @@ import React, { useState, useEffect, useRef } from "react";
 import { FaAngleRight, FaAngleLeft, FaThumbsUp, FaThumbsDown, FaRegThumbsDown } from 'react-icons/fa6';
 import ChatBox from "./chat-box";
 import TokenTree from "./token-tree";
+import Profile from "./profile";
 
 const BoxContainer = props => {
     const chatboxClass = props.isOpen ? "chatbox" : "chatbox open";
 
     return (
         <div className={chatboxClass}>
-            {props.componentName === 'token' ? <TokenTree /> : <></>}
+            {props.componentName === 'token' ? <TokenTree onHover={props.onHover} /> : <></>}
             {props.componentName === 'chat' ? <ChatBox /> : <></>}
+            {props.componentName === 'profile' ? <Profile /> : <></>}
             <button onClick={props.togglebox} className="chatbox-toggle pl-1">
                 {props.isOpen ? <FaAngleLeft color="#666564" size="2em" /> : <FaAngleRight color="#666564" size="2em" />}
             </button>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom'
-const Sidebar = ({ isOpen, toggleBox }) => {
+const Sidebar = ({ isOpen, toggleBox, setComponentName }) => {
     const textColor = isOpen ? 'text-primary' : 'text-primary-gray'
     return (
         <div className="sidebar">
@@ -33,20 +33,20 @@ const Sidebar = ({ isOpen, toggleBox }) => {
 
                 </li> */}
             </ul>
-            {/* <ul className="sidebar-menu d-flex justify-center align-items-center">
-                <li>
+            <ul className="sidebar-menu d-flex justify-center align-items-center">
+                <li onClick={() => setComponentName()}>
                     <Link className="  text-white mr-3" to="/">
-                        <div className="text-center">
-                            <img className="mx-auto" src="/images/faq.svg" width="40" height="40" />
+                        <div className="text-center mb-2">
+                            <img className="mx-auto" src="/images/avatar.svg" width="30" height="30" />
                         </div>
                         <div className="text-sm text-black text-center mx-auto">
                             <h6>
-                                Faq
+                                Profile
                             </h6>
                         </div>
                     </Link>
                 </li>
-            </ul> */}
+            </ul>
 
 
         </div>
