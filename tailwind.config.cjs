@@ -10,7 +10,9 @@ module.exports = {
         "primary-text": "#666564",
         "primary-gray": "#807F7D",
         "border-gray": "#B2B1AE",
-        "light-gray": "#E5E4E0"
+        "light-gray": "#F5F4EF",
+        "light-yellow": "#FFFFCF",
+        "light-green": "#C9F7C3",
       },
     },
   },
