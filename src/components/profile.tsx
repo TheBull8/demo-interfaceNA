@@ -14,7 +14,7 @@ const Profile = () => {
     const { user, isAuthenticated } = useAuth0();
 
     return (
-        <div className="mt-[90px] overflow-y-auto">
+        <div className="overflow-y-auto profile-container">
             <div className="flex justify-between items-center border-b-[1px] pb-4 pl-8">
                 <div className="flex justify-center">
                     <LazyLoadImage src="/images/avatar.svg" width={60} alt="/images/alt-img.svg" className="send-icon" />

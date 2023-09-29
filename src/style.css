@@ -191,7 +191,7 @@
 }
 
 .custom-outline:hover {
-    color: white!important
+    color: white !important
 }
 
 .token-card {
@@ -199,6 +199,13 @@
     display: flex;
     flex-direction: column;
     height: calc(100% - 210px);
+}
+
+.profile-container {
+    padding-top: 90px;
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 20px);
 }
 
 .chat-content {

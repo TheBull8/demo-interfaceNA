@@ -53,24 +53,24 @@ interface ChildComponentProps {
     // ...other props
 }
 
-const coordinates = [
-    [102.0835727024093, 14.972782907195878],
-    [102.08245690345836, 14.970274664701037],
-    [102.07771475791998, 14.971787905422005],
-    [102.07804735183862, 14.967714568737605],
-    [102.08642657280194, 14.966201299252418],
-    [102.08680208206363, 14.968139526055339],
-    [102.08907659530837, 14.971476966420795],
-    [102.08406622886764, 14.969321110264545],
-    [102.08406622886764, 14.97056487607854],
-    [102.08506401062186, 14.971860457791223],
-];
+// const coordinates = [
+//     [102.0835727024093, 14.972782907195878],
+//     [102.08245690345836, 14.970274664701037],
+//     [102.07771475791998, 14.971787905422005],
+//     [102.07804735183862, 14.967714568737605],
+//     [102.08642657280194, 14.966201299252418],
+//     [102.08680208206363, 14.968139526055339],
+//     [102.08907659530837, 14.971476966420795],
+//     [102.08406622886764, 14.969321110264545],
+//     [102.08406622886764, 14.97056487607854],
+//     [102.08506401062186, 14.971860457791223],
+// ];
 
 const QueryComponent: React.FC<ChildComponentProps> = ({ hoveredData }) => {
     console.log("hoveredData in QueryComponent:", hoveredData);
     const [features, setFeatures] = useState<PolygonData[]>();
     const [showPopup, setShowPopup] = useState<boolean>(true);
-    const [markerColors, setMarkerColors] = useState(new Array(coordinates.length).fill('red'));
+    // const [markerColors, setMarkerColors] = useState(new Array(coordinates.length).fill('red'));
     const [confirmationData, setConfirmationData] = useState(null);
 
     const markerRef = useRef<mapboxgl.Marker>();
@@ -215,11 +215,11 @@ const QueryComponent: React.FC<ChildComponentProps> = ({ hoveredData }) => {
                     mapStyle="mapbox://styles/mapbox/satellite-v9"
                     mapboxAccessToken={TOKEN}
                 >
-                    {coordinates.map((coords, index) => (
+                    {/* {coordinates.map((coords, index) => (
                         <Marker key={index} longitude={coords[0]} latitude={coords[1]}
                             color={markerColors[index]}
                             ref={markerRef} />
-                    ))}
+                    ))} */}
                     <NavigationControl position="bottom-right" />
                     <DrawControl
                         position="bottom-right"
