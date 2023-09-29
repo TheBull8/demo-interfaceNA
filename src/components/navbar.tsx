@@ -105,7 +105,7 @@ const Navbar = () => {
             Log in
           </button>
         )}
-
+        <w3m-button />
         <details className="dropdown dropdown-bottom dropdown-end bg-white ">
           <summary
             tabIndex={0}
