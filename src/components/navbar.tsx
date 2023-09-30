@@ -46,7 +46,6 @@ const Navbar = () => {
         </a>
       </div>
       <div className="flex-none">
-        {isAuthenticated && <h2>{`hi, ${user.given_name}`}</h2>}
         {/* <div className='custom-dropdown'>
                     <Select
                         value={selectedLanguage}
