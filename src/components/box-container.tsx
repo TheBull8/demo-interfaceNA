@@ -16,7 +16,7 @@ const BoxContainer = props => {
                 {props.isOpen ? <FaAngleLeft color="#666564" size="2em" /> : <FaAngleRight color="#666564" size="2em" />}
             </button>
             <div className="tree-buttons">
-                <button className="btn btn-sm bg-white rounded-full mr-4">Available trees</button>
+                <a href="https://redant.world/marketplace" className="btn btn-sm bg-white rounded-full mr-4 normal-case">Available trees</a>
                 <button onClick={props.setComponentName} className="btn btn-sm bg-white rounded-full">My Tokenized trees</button>
             </div>
         </div >

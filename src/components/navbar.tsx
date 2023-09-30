@@ -129,28 +129,13 @@ const Navbar = () => {
             className="dropdown-content z-[1] menu p-2 shadow bg-white rounded-box w-52"
           >
             <li className="p-3">
-              <a className="custom-link text-black hover:text-primary hover:bg-white">
+              <a href="https://www.greenant.farm/about-2/" className="custom-link text-black hover:text-primary hover:bg-white">
                 About Us
               </a>
             </li>
             <li className="p-3">
-              <a className="custom-link text-black hover:text-primary hover:bg-white">
-                GA Map
-              </a>
-            </li>
-            <li className="p-3">
-              <a className="custom-link text-black hover:text-primary hover:bg-white">
+              <a href="https://www.greenant.farm/docs/" className="custom-link text-black hover:text-primary hover:bg-white">
                 Docs
-              </a>
-            </li>
-            <li className="p-3">
-              <a className="custom-link text-black hover:text-primary hover:bg-white">
-                Community
-              </a>
-            </li>
-            <li className="p-3">
-              <a className="custom-link text-black hover:text-primary hover:bg-white">
-                Contact Us
               </a>
             </li>
           </ul>
