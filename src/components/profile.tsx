@@ -32,10 +32,10 @@ const Profile = ({ component }) => {
     `ETHEREUM:${address}`,
     "600"
   );
+  console.log("i am here");
+
   useEffect(() => {
     // fetch nfts to display in profile page
-
-    console.log(nftItems);
 
     nftItems
       .then((result) => {
