@@ -13,7 +13,7 @@ export const itemAPI = {
     let items;
     try {
       const output = await raribleHttpClient.get(
-        `v0.1/items/byOwnerWithOwnership?owner=${owner}&continuation=${continuation}`
+        `v0.1/items/byOwnerWithOwnership?owner=${owner}`
       );
 
       if (output && output.data && output.status === 200) {
