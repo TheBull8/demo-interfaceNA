@@ -231,21 +231,36 @@ const Profile = ({ toChat }) => {
             </div>
           ) :
           <div className="overflow-y-auto profile-container">
-            <h2 className="font-bold ml-5 mt-3">My Dashboard</h2>
+            <h2 className="font-semibold ml-5 mt-3">My Dashboard</h2>
             <LazyLoadImage
               src="/images/profile.svg"
               width={150}
               alt="/images/alt-img.svg"
               className="send-icon mt-16 mx-auto"
             />
-            <p className="text-primary-text font-bold text-xl mx-auto mt-8">You don't have a profile yet</p>
-            <p className="text-primary-text w-3/5 text-center mx-auto mt-5">You need a profile to access the full feature of Desidera</p>
+            <p className="text-primary-text font-semibold text-xl mx-auto mt-8">You don't have a profile yet</p>
+            <p className="text-primary-text text-sm w-3/5 text-center mx-auto mt-5">You need a profile to access the full feature of Desidera</p>
             <Link className="text-white mx-auto mt-8" to="/profile-edit">
-              <button className="btn  w-48  btn-sm btn-primary text-white hover:text-white rounded-full normal-case"><FaPlus />Create Profile</button>
+              <div onClick={toChat} className="flex items-center mx-auto rounded-full text-sm font-semibold hover:bg-[#1173D0] transition duration-300 mr-4 text-white bg-primary rounded custom-button px-6 py-[8px]">
+                <div className="inline-block">
+                  <FaPlus />
+                </div>
+                <span className="ml-2 text-sm inline-block">Create Profile</span>
+              </div>
             </Link>
-            <p className="text-primary-text font-bold text-xl mx-auto mt-8">OR</p>
-            <p className="text-primary-text  mx-auto mt-8">Use the Assistant to explore more</p>
-            <button onClick={toChat} className="btn btn-outline profile-outline btn-sm mx-auto mt-8 btn-primary hover:text-white rounded-full w-48 normal-case"><FaCommentDots />Assistant</button>
+            <p className="text-primary-text font-semibold text-xl mx-auto mt-8">OR</p>
+            <p className="text-primary-text text-sm mx-auto mt-8">Use the Assistant to explore more</p>
+            <div onClick={toChat} className="mx-auto rounded-full font-semibold hover:bg-primary-hover transition duration-300 py-[6px] items-center justify-center px-6 text-xs custom-outline cursor-pointer text-primary flex border border-[#3394EE] mt-3 normal-case">
+              <LazyLoadImage
+                src="/images/chat.svg"
+                width={16}
+                height={16}
+                alt="NFTree"
+                className="send-icon inline-block"
+              />
+              <span className="ml-2 text-sm inline-block">Assistant</span>
+            </div>
+
           </div>
       }
 

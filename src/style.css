@@ -190,9 +190,6 @@
     height: calc(100% - 140px);
 }
 
-.custom-outline:hover {
-    color: white !important
-}
 
 .token-card {
     margin-top: 10px;
@@ -269,6 +266,13 @@
     color: white !important;
 }
 
-.tab-active{
-    color: white!important;
+.tab-active {
+    color: #1A1919 !important;
+    font-weight: 700;
+    background-color: #C0DCF6 !important;
 }
+
+.tab {
+    border-radius: 4px !important;
+}
+
