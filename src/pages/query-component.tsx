@@ -79,12 +79,11 @@ interface ChildComponentProps {
 // ];
 
 const QueryComponent: React.FC<ChildComponentProps> = ({ hoveredData }) => {
-  console.log("hoveredData in QueryComponent:", hoveredData);
   const [features, setFeatures] = useState<PolygonData[]>();
   const [showPopup, setShowPopup] = useState<boolean>(true);
   // const [markerColors, setMarkerColors] = useState(new Array(coordinates.length).fill('red'));
   const [confirmationData, setConfirmationData] = useState(null);
-
+  const [event, setEvent] = useState<any>();
   const markerRef = useRef<mapboxgl.Marker>();
 
   const popup = useMemo(() => {
@@ -155,6 +154,8 @@ const QueryComponent: React.FC<ChildComponentProps> = ({ hoveredData }) => {
 
   const onUpdate = useCallback((e) => {
     setConfirmationData(e);
+    console.log(e)
+    setEvent(e)
     const modal = document.getElementById("my_modal");
     if (modal instanceof HTMLDialogElement) {
       modal.showModal();
@@ -179,6 +180,15 @@ const QueryComponent: React.FC<ChildComponentProps> = ({ hoveredData }) => {
       });
     }
   }, [confirmationData]);
+
+  const deleteButton = document.querySelector('.mapbox-gl-draw_ctrl-draw-btn.mapbox-gl-draw_trash');
+  const deleteButtonClickHandler = () => {
+    // Check if the delete button exists
+    if (deleteButton) {
+      // Trigger a click event on the delete button
+      (deleteButton as HTMLButtonElement).click();
+    }
+  };
 
   const onDelete = useCallback((e) => {
     setFeatures((currFeatures) => {
@@ -210,7 +220,7 @@ const QueryComponent: React.FC<ChildComponentProps> = ({ hoveredData }) => {
                 >
                   Yes
                 </button>
-                <button className="btn w-24">Cancel</button>
+                <button onClick={deleteButtonClickHandler} className="btn w-24">Cancel</button>
               </form>
             </div>
           </div>

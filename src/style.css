@@ -47,7 +47,7 @@
     /* Position at the left */
     right: 0;
     /* Stretch to the right edge */
-    z-index: 6;
+    z-index: 30;
     /* Higher z-index to appear on top of other elements */
 }
 
@@ -263,4 +263,12 @@
 .custom-link:active {
     background-color: #3394EE !important;
     color: white !important;
+}
+
+.profile-outline:hover {
+    color: white !important;
+}
+
+.tab-active{
+    color: white!important;
 }

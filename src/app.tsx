@@ -6,6 +6,7 @@ import "./App.css";
 import "./style.css";
 
 import QueryComponent from "./pages/query-component";
+import ProfileEdit from "./pages/profile-edit";
 import Layout from "./components/layout";
 interface HoveredData {
   lat: number;
@@ -17,7 +18,8 @@ export default function App() {
     <Router>
       <Layout>
         <Routes>
-          <Route path="/" element={<QueryComponent  />} />
+          <Route path="/" element={<QueryComponent />} />
+          <Route path="/profile-edit" element={<ProfileEdit />} />
         </Routes>
       </Layout>
     </Router>

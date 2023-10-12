@@ -11,7 +11,7 @@ const BoxContainer = props => {
         <div className={chatboxClass}>
             {props.componentName === 'token' ? <TokenTree onHover={props.onHover} /> : <></>}
             {props.componentName === 'chat' ? <ChatBox /> : <></>}
-            {props.componentName === 'profile' ? <Profile /> : <></>}
+            {props.componentName === 'profile' ? <Profile toChat={props.toChat} /> : <></>}
             <button onClick={props.togglebox} className="chatbox-toggle pl-1">
                 {props.isOpen ? <FaAngleLeft color="#666564" size="2em" /> : <FaAngleRight color="#666564" size="2em" />}
             </button>

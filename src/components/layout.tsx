@@ -46,7 +46,7 @@ createWeb3Modal({ wagmiConfig, projectId, chains });
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [showBox, setShowBox] = useState(true);
-  const [componentName, setComponentName] = useState("chat");
+  const [componentName, setComponentName] = useState("profile");
 
   const [hoveredData, setHoveredData] = useState<HoveredData | null>(null);
   const toggleBox = () => {
@@ -84,6 +84,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             isOpen={showBox}
             togglebox={toggleBox}
             componentName={componentName}
+            toChat={handleSideBarButton}
             setComponentName={handleTokenButton}
           />
           {/* Main content */}
