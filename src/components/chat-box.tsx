@@ -1,13 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FaAngleRight, FaAngleLeft, FaThumbsUp, FaThumbsDown, FaRegThumbsDown } from 'react-icons/fa6';
-import { useAuth0 } from "@auth0/auth0-react";
 
 
 const CHAT_ID = import.meta.env.VITE_CHAT_ID;
 const CHAT_AUTH = import.meta.env.VITE_CHAT_AUTH;
 
 const ChatBox = () => {
-  const { user, isAuthenticated } = useAuth0();
   const chatContentRef = useRef(null);
   const chatboxRef = useRef(null)
   const [messages, setMessages] = useState([]);
