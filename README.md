@@ -1,6 +1,6 @@
 # Demo Interface - React App
 
-Welcome to the **Demo Interface** project! This README provides essential information to help you understand, set up, and use this React application effectively.
+Welcome to the **Demo InterfaceNA** project! This README provides essential information to help you understand, set up, and use this React application effectively.
 
 ## Usage
 
