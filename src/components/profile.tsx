@@ -12,7 +12,6 @@ import {
 } from "react-icons/md";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 // import withAuthenticationRequired from "@auth0/auth0-react";
-import { withAuthenticationRequired, useAuth0 } from "@auth0/auth0-react";
 import { itemAPI } from "./apis/fetchData";
 import { useAccount } from "wagmi";
 
@@ -24,7 +23,8 @@ const Profile = ({ toChat }) => {
   const address = useAccount().address;
 
   //   get user data
-  const { user, isAuthenticated, isLoading } = useAuth0();
+  //const { user, isAuthenticated, isLoading } = useAuth0();
+  const isAuthenticated = true;
 
   //   set nft trees
   const [nfts, setNfts] = useState<[] | null>();
