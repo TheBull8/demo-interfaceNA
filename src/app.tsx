@@ -1,7 +1,7 @@
 import * as React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { createRoot } from "react-dom/client";
-import { Auth0Provider } from "@auth0/auth0-react";
+
 import "./App.css";
 import "./style.css";
 
@@ -27,8 +27,8 @@ export default function App() {
 }
 
 export function renderToDom(container) {
-  const domain = import.meta.env.VITE_AUTH0_DOMAIN;
-  const clientId = import.meta.env.VITE_AUTH0_CLIENTID;
+  const domain = dev-tq1jxx6guugo8l21.eu.auth0.com;
+  const clientId = Nw4GucqiHi4PEkHcGpxdoSQWZr3oiQiz;
   createRoot(container).render(
     <Auth0Provider
       domain={domain}
